@@ -9,8 +9,8 @@
 	<div class="topnav">
 		<!-- Substitute links below with image elements. -->
 		<a href="/">Acadmate</a>
-		<a href="Settings" style="float: right">Settings</a>
-		<a href="Profile" style="float: right">Profile</a>
+		<a href="/" style="float: right">Settings</a>
+		<a href="/" style="float: right">Profile</a>
 	</div>
 	<slot></slot>
 </main>
