@@ -15,6 +15,7 @@
 		<ul>
 			<li><a href="/" class="btn active">Dashboard</a></li>
 			<li><a href="/" class="btn inactive">My Curriculum</a></li>
+			<li><a href="/" class="btn inactive">Grades</a></li>
 			<li><a href="/" class="btn inactive">Grade Alerts</a></li>
 			<li><a href="/" class="btn inactive">Requirements</a></li>
 		</ul>
