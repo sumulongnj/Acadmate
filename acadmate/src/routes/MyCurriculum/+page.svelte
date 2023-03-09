@@ -2,7 +2,7 @@
 <main>
     <div class="Title">
         <h1>My Curriculum</h1>
-        <a href="/GradeAlerts/paul">Go to paul</a>
+        <a href="/">Go to Dashboard</a>
     </div>
 </main>
 
