@@ -11,6 +11,7 @@
 		<ul>
 			<li><a href="/" class="btn inactive">Dashboard</a></li>
 			<li><a href="/MyCurriculum" class="btn active">My Curriculum</a></li>
+			<li><a href="/Grades" class="btn inactive">Grades</a></li>
 			<li><a href="/GradeAlerts" class="btn inactive">Grade Alerts</a></li>
 			<li><a href="/Requirements" class="btn inactive">Requirements</a></li>
 		</ul>
