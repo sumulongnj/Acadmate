@@ -62,3 +62,11 @@ button:not(:disabled):active {
 button:focus {
 	border-color: #666;
 }
+
+.title{
+	margin: auto;
+	position: absolute;
+	top: 23px;
+	left: 240px;
+	padding: 35px;
+}
