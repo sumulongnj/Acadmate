@@ -22,6 +22,7 @@
         semesters = [...semesters, newSemester];
         // semesters = [newSemester, ...semesters];
         showPopup = false;
+        numSemesters = numSemesters + 1;
     };
 </script>
 
