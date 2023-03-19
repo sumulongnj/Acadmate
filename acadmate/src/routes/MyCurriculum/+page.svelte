@@ -24,6 +24,10 @@
         showPopup = false;
         numSemesters = numSemesters + 1;
     };
+
+    const deleteSemester = (e, id) => {
+        semesters = semesters.filter(semester => semester.id != id);
+    };
 </script>
 
 
@@ -35,18 +39,14 @@
         
     </div>
     
-    <div class="Title">
-        <h1>My Curriculum</h1>
-        <a href="/">Go to Dashboard</a>
-    </div>
     <div class="AddDelete">
         <button on:click={togglePopup}>Add Semester</button>
     </div>
     <div class="SemesterList">
         {#each semesters as semester (semester.id)}
             <div class="SemesterItem">
-                <h4>{semester.name}</h4>
-                <p>{semester.year}</p>
+                <h4>{semester.name} {semester.year}</h4>
+                <button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button>
             </div>
         {:else}
             <p>There are no semester to show...</p>
