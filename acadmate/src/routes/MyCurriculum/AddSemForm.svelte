@@ -18,13 +18,14 @@
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-    <h3>New Semester</h3>
-    <input type="number" placeholder="Year" bind:value={year}>
+    <div style="color: #ac4949; font-size: 25px;">
+        <h3>New Semester</h3>
+    </div>
+    <input type="text" placeholder="Year" bind:value={year}>
     <input type="text" placeholder="Semester" bind:value={name}>
     <button>Add</button>
-
 </form>
 
 <style>
-
+    
 </style>

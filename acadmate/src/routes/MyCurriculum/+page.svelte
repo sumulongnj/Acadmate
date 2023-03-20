@@ -30,12 +30,9 @@
     };
 </script>
 
-
-
 <main>
     <div class="Title">
         <h1>My Curriculum</h1>
-        <a href="/">Go to Dashboard</a>
         
     </div>
     
@@ -44,14 +41,24 @@
     </div>
     <div class="SemesterList">
         {#each semesters as semester (semester.id)}
-            <div class="SemesterItem">
-                <h4>{semester.name} {semester.year}</h4>
-                <button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button>
-            </div>
-        {:else}
-            <p>There are no semester to show...</p>
+            {#if semester.id % 3 == 1}
+                <div class="SemesterItems1">
+                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                </div>
+            {:else if semester.id % 3 == 2}
+                <div class="SemesterItems2">
+                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                </div>
+            {:else}
+                <div class="SemesterItems3">
+                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                </div>
+            {/if}
         {/each}
-    </div>
+        </div>
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
@@ -67,17 +74,55 @@
         left: 20%;
     }
     .AddDelete{
-        margin: auto;
         position: absolute;
-        top: 10%;
-        left: 50%;
+        margin-left: 580px;
+        margin-top: 60px;
     }
-    .SemesterList{
-        margin: auto;
+    .SemesterList {
         position: absolute;
-        top: 20%;
-        left: 50%;
-        /* z-index: 0; */
+        margin-left: 325px;
+        margin-top: 100px;
     }
-
+    .SemesterItems1 h3 {
+        color: #ffffff;
+        font-weight: bold;
+        margin: 20px;
+    }
+    .SemesterItems2 h3 {
+        color: #ac4949;
+        font-weight: bold;
+        margin: 20px;
+    }
+    .SemesterItems3 h3 {
+        color: #ffd9c3;
+        font-weight: bold;
+        margin: 20px;
+    }
+    .SemesterItems1 {
+        margin-inline: 10px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        height: 170px;
+        width: 400px;
+        background-color: #e28f60;
+		border-radius: 20px;
+    }
+    .SemesterItems2 {
+        margin-inline: 10px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        height: 170px;
+        width: 400px;
+        background-color: #ffffff;
+		border-radius: 20px;
+    }
+    .SemesterItems3 {
+        margin-inline: 10px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        height: 170px;
+        width: 400px;
+        background-color: #ac4949;
+		border-radius: 20px;
+    }
 </style>

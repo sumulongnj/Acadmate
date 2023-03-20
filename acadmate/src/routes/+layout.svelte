@@ -27,7 +27,7 @@
 		width: 100%;
 		background-color: #ac4949;
 		overflow: hidden;
-		position: fixed;
+		position: relative;
 		z-index: 1;
 		box-shadow: 0px 5px 10px lightgray;
 	}
