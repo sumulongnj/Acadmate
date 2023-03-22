@@ -12,7 +12,8 @@ export const nodes = [
 	() => import('./nodes/8'),
 	() => import('./nodes/9'),
 	() => import('./nodes/10'),
-	() => import('./nodes/11')
+	() => import('./nodes/11'),
+	() => import('./nodes/12')
 ];
 
 export const server_loads = [];
@@ -22,7 +23,8 @@ export const dictionary = {
 		"/GradeAlerts": [8,[3]],
 		"/Grades": [9,[4]],
 		"/MyCurriculum": [10,[5]],
-		"/Requirements": [11,[6]]
+		"/MyCurriculum/ClassTemplate": [11,[5]],
+		"/Requirements": [12,[6]]
 	};
 
 export const hooks = {

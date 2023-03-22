@@ -36,25 +36,25 @@
         
     </div>
     
-    <div class="AddDelete">
-        <button on:click={togglePopup}>Add Semester</button>
+    <div class="AddButton">
+        <button on:click={togglePopup}>+</button>
     </div>
     <div class="SemesterList">
         {#each semesters as semester (semester.id)}
             {#if semester.id % 3 == 1}
                 <div class="SemesterItems1">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
                 </div>
             {:else if semester.id % 3 == 2}
                 <div class="SemesterItems2">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
                 </div>
             {:else}
                 <div class="SemesterItems3">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>Delete Semester</button></h3>
+                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
                 </div>
             {/if}
         {/each}
@@ -73,9 +73,9 @@
         top: 10%;
         left: 20%;
     }
-    .AddDelete{
+    .AddButton{
         position: absolute;
-        margin-left: 580px;
+        margin-left: 630px;
         margin-top: 60px;
     }
     .SemesterList {
