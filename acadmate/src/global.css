@@ -10,20 +10,7 @@ body {
 	color: #333;
 	background-color: #fff4f4;
 	box-sizing: border-box;
-	font-family: Sequel Sans Disp Bold, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-}
-
-a {
-	color: rgb(0,100,200);
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:visited {
-	color: rgb(0,80,160);
+	font-family: Inter;
 }
 
 label {
@@ -66,7 +53,59 @@ button:focus {
 .Title{
 	margin: auto;
 	position: absolute;
-	top: 23px;
+	top: 25px;
 	left: 240px;
 	padding: 35px;
+}
+
+/* Side Navigation Bar*/
+.sidenav {
+	height: 100%;
+	width: 225px;
+	top: 0;
+	left: 0;
+	background-color: #ffffff;
+	overflow-x: hidden;
+	padding-top: 60px;
+	position: fixed;
+	font-weight: 500;
+	margin-top: 5px;
+	font-size: 15px;
+}
+
+.sidenav ul {
+	list-style-type: none;
+	margin: 0;
+	margin-left: 20px;
+	padding: 0;
+	width: max-content;
+}
+.sidenav li a {
+	display: block;
+	padding: 12px 20px;
+	text-decoration: none;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	/* color: #898989; */
+}
+.icon {
+	width: 18px;
+	padding: 0px 12px 0px 8px;
+	float:left;
+}
+.inactive:hover {
+	background-color: #F0F0F0;
+}
+.active {
+	background-color: #ac4949;
+	color: white;
+}
+
+.inactive {
+	background-color: #ffffff;
+	color: #898989;
+}
+.active img{
+	filter: brightness(200%);
 }

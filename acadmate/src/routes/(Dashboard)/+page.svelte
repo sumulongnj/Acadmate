@@ -3,7 +3,7 @@
 
 <main>
     <div class="Title">
-        <h1>Welcome to Dashboard</h1>
+        <h2>Welcome to Dashboard!</h2>
     </div>
 </main>
 

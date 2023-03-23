@@ -18,7 +18,7 @@
       background: rgba(0,0,0,0.8);
     }
     .popup{
-      padding: 50px;
+      padding: 5px 10px 40px 50px;
       border-radius: 40px;
       max-width: 300px;
       margin: 10% auto;

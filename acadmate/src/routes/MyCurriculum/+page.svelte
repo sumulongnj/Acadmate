@@ -19,10 +19,13 @@
     const addSemester = (e) => {
         //console.log(e.detail);
         const newSemester = e.detail;
-        semesters = [...semesters, newSemester];
-        // semesters = [newSemester, ...semesters];
-        showPopup = false;
-        numSemesters = numSemesters + 1;
+
+        if (newSemester.name && newSemester.year) {
+            semesters = [...semesters, newSemester];
+            // semesters = [newSemester, ...semesters];
+            showPopup = false;
+            numSemesters = numSemesters + 1;
+        }
     };
 
     const deleteSemester = (e, id) => {
@@ -32,7 +35,7 @@
 
 <main>
     <div class="Title">
-        <h1>My Curriculum</h1>
+        <h2>My Curriculum</h2>
         
     </div>
     
@@ -69,13 +72,13 @@
 <style>
     .AddButton{
         position: absolute;
-        margin-left: 630px;
-        margin-top: 60px;
+        margin-left: 500px;
+        margin-top: 75px;
     }
     .SemesterList {
         position: absolute;
-        margin-left: 325px;
-        margin-top: 100px;
+        margin-left: 280px;
+        margin-top: 130px;
     }
     .SemesterItems1 h3 {
         color: #ffffff;
@@ -97,7 +100,7 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 400px;
+        width: 380px;
         background-color: #e28f60;
 		border-radius: 20px;
     }
@@ -106,7 +109,7 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 400px;
+        width: 380px;
         background-color: #ffffff;
 		border-radius: 20px;
     }
@@ -115,7 +118,7 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 400px;
+        width: 380px;
         background-color: #ac4949;
 		border-radius: 20px;
     }

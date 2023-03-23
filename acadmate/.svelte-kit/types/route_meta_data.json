@@ -1,28 +1,23 @@
 {
 	"/(Dashboard)": [
-		"src/routes/+layout.js",
 		"src/routes/+layout.js"
 	],
 	"/": [
 		"src/routes/+layout.js"
 	],
 	"/GradeAlerts": [
-		"src/routes/+layout.js",
 		"src/routes/+layout.js"
 	],
 	"/Grades": [
-		"src/routes/+layout.js",
 		"src/routes/+layout.js"
 	],
 	"/MyCurriculum": [
-		"src/routes/+layout.js",
 		"src/routes/+layout.js"
 	],
 	"/MyCurriculum/ClassTemplate": [
 		"src/routes/+layout.js"
 	],
 	"/Requirements": [
-		"src/routes/+layout.js",
 		"src/routes/+layout.js"
 	]
 }

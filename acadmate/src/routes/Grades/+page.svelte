@@ -1,7 +1,7 @@
 
 <main>
     <div class="Title">
-        <h1>Grades</h1>
+        <h2>Grades</h2>
     </div>
     <div class="GWA">
         <div style="background-color: #e28f60; color: #ffffff">
