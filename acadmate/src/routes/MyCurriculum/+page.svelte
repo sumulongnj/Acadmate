@@ -67,12 +67,6 @@
 </Popup>
 
 <style>
-    .Title{
-        margin: auto;
-        position: absolute;
-        top: 10%;
-        left: 20%;
-    }
     .AddButton{
         position: absolute;
         margin-left: 630px;
