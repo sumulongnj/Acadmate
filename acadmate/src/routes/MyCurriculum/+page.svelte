@@ -40,24 +40,35 @@
     </div>
     
     <div class="AddButton">
-        <button on:click={togglePopup}>+</button>
+        <button on:click={togglePopup}>
+            <strong>+</strong>
+        </button>
     </div>
     <div class="SemesterList">
         {#each semesters as semester (semester.id)}
             {#if semester.id % 3 == 1}
                 <div class="SemesterItems1">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
+                    <h3><br/><br/><br/><br/>
+                    <button on:click={(e) => deleteSemester(e, semester.id)}>
+                        <img src="/trash.png" alt="delete" class="icon">
+                    </button></h3>
                 </div>
             {:else if semester.id % 3 == 2}
                 <div class="SemesterItems2">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
+                    <h3><br/><br/><br/><br/>
+                    <button on:click={(e) => deleteSemester(e, semester.id)}>
+                        <img src="/trash.png" alt="delete" class="icon">
+                    </button></h3>
                 </div>
             {:else}
                 <div class="SemesterItems3">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/><button on:click={(e) => deleteSemester(e, semester.id)}>-</button></h3>
+                    <h3><br/><br/><br/><br/>
+                    <button on:click={(e) => deleteSemester(e, semester.id)}>
+                        <img src="/trash.png" alt="delete" class="icon">
+                    </button></h3>
                 </div>
             {/if}
         {/each}
@@ -72,9 +83,29 @@
 <style>
     .AddButton{
         position: absolute;
-        margin-left: 500px;
-        margin-top: 75px;
+        margin-left: 480px;
+        margin-top: 78px;
     }
+    .AddButton button {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
+    .SemesterList button, img {
+        width: 25px;
+        height: 25px;
+        background-color: transparent;
+        outline: none;
+        background-repeat: no-repeat;
+        border: 0px;
+        padding-left: 70px;
+    }
+
+    img:hover {
+        width: 30px;
+        height: 30px;
+    }
+    
     .SemesterList {
         position: absolute;
         margin-left: 280px;
