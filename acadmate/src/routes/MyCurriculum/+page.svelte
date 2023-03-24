@@ -1,8 +1,11 @@
 <script>
     import Popup from './popup.svelte';
     import AddSemForm from './AddSemForm.svelte';
+    import SemesterTemplate from './semesterTemplate.svelte';
 
     let showPopup = false;
+    let showSemester = false;
+    let showCurriculum = true;
 
     let togglePopup = () => {
         showPopup = !showPopup;
@@ -31,9 +34,20 @@
     const deleteSemester = (e, id) => {
         semesters = semesters.filter(semester => semester.id != id);
     };
+
+    let gotoSemester = (e, semesterYear, semesterName) => {
+        showSemester = !showSemester;
+        showCurriculum = !showCurriculum;
+        currentSemYear = semesterYear;
+        currentSemName = semesterName;
+    };
+
+    let currentSemYear;
+    let currentSemName;
 </script>
 
 <main>
+    {#if showCurriculum}
     <div class="Title">
         <h2>My Curriculum</h2>
         
@@ -48,18 +62,20 @@
         {#each semesters as semester (semester.id)}
             {#if semester.id % 3 == 1}
                 <div class="SemesterItems1">
+                    <button on:click={(e) => gotoSemester (e, semester.year, semester.name)} id="testButton"></button>
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="/trash.png" alt="delete" class="icon">
-                    </button></h3>
+                        <img src="/trash.png" alt="delete" class="icon trash">
+                    </button>
+                </h3>
                 </div>
             {:else if semester.id % 3 == 2}
                 <div class="SemesterItems2">
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="/trash.png" alt="delete" class="icon">
+                        <img src="/trash.png" alt="delete" class="icon trash">
                     </button></h3>
                 </div>
             {:else}
@@ -67,12 +83,13 @@
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="/trash.png" alt="delete" class="icon">
+                        <img src="/trash.png" alt="delete" class="icon trash">
                     </button></h3>
                 </div>
             {/if}
         {/each}
         </div>
+        {/if}
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
@@ -80,7 +97,22 @@
     <!-- <h4>HII</h4> -->
 </Popup>
 
+<SemesterTemplate {showSemester} semYear={currentSemYear} semName={currentSemName}>
+
+</SemesterTemplate>
+
 <style>
+    #testButton{
+        margin-inline: 10px;
+        margin-bottom: 20px;
+        position: absolute;
+        height: 170px;
+        width: 380px;
+		border-radius: 20px;
+    }
+    .trash {
+        position: absolute;
+    }
     .AddButton{
         position: absolute;
         margin-left: 480px;
