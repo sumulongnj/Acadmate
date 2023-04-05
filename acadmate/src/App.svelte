@@ -1,5 +1,10 @@
 <script>
-	export let name;
+	import Router, {location, link} from 'svelte-spa-router';
+	import Dashboard from './pages/Dashboard.svelte';
+	import MyCurriculum from './pages/MyCurriculum.svelte'; 
+	import Grades from './pages/Grades.svelte'; 
+	import GradeAlerts from './pages/GradeAlerts.svelte';
+	import Requirements from './pages/Requirements.svelte'; 
 </script>
 
 <main>
