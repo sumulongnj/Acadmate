@@ -3,7 +3,9 @@
 </script>
 
 <main>
-    <p>Dashboard</p>
+    <div class="Title">
+        <h2>Welcome to Dashboard!</h2>
+    </div>
 </main>
 
 <style>
