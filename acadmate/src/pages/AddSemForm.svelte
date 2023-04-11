@@ -7,11 +7,13 @@
     let name;
 
     const handleSubmit = () => {
-        console.log(year, name, newid);
+        console.log(newid, name, year);
         const semester = {
+            id: newid,
+            name,
             year,
-            name, 
-            id: newid 
+            gwa: 0.00,
+            classList: [],
         }
         dispatch('addSemester', semester);
     };

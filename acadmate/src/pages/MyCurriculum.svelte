@@ -11,49 +11,25 @@
         showPopup = !showPopup;
     };
 
-    let TempSemesterList = [
-        {
-            id: 1,
-            name: "1st",
-            year: "2020",
-            gwa: "5.00",
-            classList: [
-                { className: "CS 192", grade: "1.00" },
-                { className: "CS 180", grade: "1.00" },
-            ],
-        },
-        {
-            id: 2,
-            name: "2nd",
-            year: "2020",
-            gwa: "5.00",
-            classList: [
-                { className: "CS 192", grade: "1.00" },
-                { className: "CS 180", grade: "1.00" },
-            ],
-        },
-    ];
-
-    localStorage.setItem("SemesterList", JSON.stringify(TempSemesterList));
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let numSemester = SemesterList.length;
 
     const addSemester = (e) => {
-        //console.log(e.detail);
         const newSemester = e.detail;
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
         numSemester = SemesterList.length;
         if (newSemester.name && newSemester.year) {
             SemesterList = [...SemesterList, newSemester];
-            // semesters = [newSemester, ...semesters];
             showPopup = false;
-            SemesterList = numSemester + 1;
+            numSemester = SemesterList.length;
+            localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
         }
     };
 
     const deleteSemester = (e, id) => {
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
         SemesterList = SemesterList.filter(semester => semester.id != id);
+        numSemester = SemesterList.length;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
     };
 
@@ -92,41 +68,12 @@
                 </div>
             {/each}
         </ul>
-        
-        <!-- {#each semesters as semester (semester.id)}
-            {#if semester.id % 3 == 1}
-                <div class="SemesterItems1">
-                    <button on:click={(e) => gotoSemester (e, semester.year, semester.name)} id="testButton"></button>
-                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/>
-                    <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="./images/trash.png" alt="delete" class="icon">
-                    </button></h3>
-                </div>
-            {:else if semester.id % 3 == 2}
-                <div class="SemesterItems2">
-                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/>
-                    <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="./images/trash.png" alt="delete" class="icon">
-                    </button></h3>
-                </div>
-            {:else}
-                <div class="SemesterItems3">
-                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                    <h3><br/><br/><br/><br/>
-                    <button on:click={(e) => deleteSemester(e, semester.id)}>
-                        <img src="./images/trash.png" alt="delete" class="icon">
-                    </button></h3>
-                </div>
-            {/if}
-        {/each} -->
     </div>
     {/if}
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
-    <AddSemForm on:addSemester={addSemester} newid={numSemesters + 1}/>
+    <AddSemForm on:addSemester={addSemester} newid={numSemester + 1}/>
     <!-- <h4>HII</h4> -->
 </Popup>
 
