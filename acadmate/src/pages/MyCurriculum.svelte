@@ -1,8 +1,11 @@
 <script>
     import Popup from './popup.svelte';
     import AddSemForm from './AddSemForm.svelte';
+    import Semester from './Semester.svelte';
 
     let showPopup = false;
+    let showSemester = false;
+    let showCurriculum = true;
 
     let togglePopup = () => {
         showPopup = !showPopup;
@@ -31,12 +34,22 @@
     const deleteSemester = (e, id) => {
         semesters = semesters.filter(semester => semester.id != id);
     };
+
+    let gotoSemester = (e, semesterYear, semesterName) => {
+        showSemester = !showSemester;
+        showCurriculum = !showCurriculum;
+        currentSemYear = semesterYear;
+        currentSemName = semesterName;
+    };
+
+    let currentSemYear;
+    let currentSemName;
 </script>
 
 <main>
+    {#if showCurriculum}
     <div class="Title">
         <h2>My Curriculum</h2>
-        
     </div>
     
     <div class="AddButton">
@@ -48,6 +61,7 @@
         {#each semesters as semester (semester.id)}
             {#if semester.id % 3 == 1}
                 <div class="SemesterItems1">
+                    <button on:click={(e) => gotoSemester (e, semester.year, semester.name)} id="testButton"></button>
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={(e) => deleteSemester(e, semester.id)}>
@@ -73,6 +87,7 @@
             {/if}
         {/each}
         </div>
+        {/if}
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
@@ -80,7 +95,20 @@
     <!-- <h4>HII</h4> -->
 </Popup>
 
+<Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester>
+
 <style>
+    #testButton{
+        margin-inline: 10px;
+        margin-bottom: 20px;
+        position: absolute;
+        height: 170px;
+        width: 380px;
+		border-radius: 20px;
+    }
+    .trash {
+        position: absolute;
+    }
     .AddButton{
         position: absolute;
         margin-left: 460px;
