@@ -11,29 +11,57 @@
         showPopup = !showPopup;
     };
 
-    let semesters = [
-        { name: '1st Semester', year: 2021, id: 1},
-        { name: '2nd Semester', year: 2021, id: 2},
-        { name: '1st Semester', year: 2022, id: 3},
-        { name: '2nd Semester', year: 2022, id: 4}
-    ]
-    let numSemesters = semesters.length;
+    let TempSemesterList = [
+        {
+            id: 1,
+            name: "1st",
+            year: "2020",
+            gwa: "5.00",
+            classList: [
+                { className: "CS 192", grade: "1.00" },
+                { className: "CS 180", grade: "1.00" },
+            ],
+        },
+        {
+            id: 2,
+            name: "2nd",
+            year: "2020",
+            gwa: "5.00",
+            classList: [
+                { className: "CS 192", grade: "1.00" },
+                { className: "CS 180", grade: "1.00" },
+            ],
+        },
+    ];
 
-    const addSemester = (e) => {
-        //console.log(e.detail);
-        const newSemester = e.detail;
+    localStorage.setItem("SemesterList", JSON.stringify(TempSemesterList));
+    console.log(TempSemesterList);
+    let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+    let numSemester = SemesterList.length;
+    console.log(SemesterList);
+    // let semesters = [
+    //     { name: '1st Semester', year: 2021, id: 1},
+    //     { name: '2nd Semester', year: 2021, id: 2},
+    //     { name: '1st Semester', year: 2022, id: 3},
+    //     { name: '2nd Semester', year: 2022, id: 4}
+    // ]
+    // let numSemesters = semesters.length;
 
-        if (newSemester.name && newSemester.year) {
-            semesters = [...semesters, newSemester];
-            // semesters = [newSemester, ...semesters];
-            showPopup = false;
-            numSemesters = numSemesters + 1;
-        }
-    };
+    // const addSemester = (e) => {
+    //     //console.log(e.detail);
+    //     const newSemester = e.detail;
 
-    const deleteSemester = (e, id) => {
-        semesters = semesters.filter(semester => semester.id != id);
-    };
+    //     if (newSemester.name && newSemester.year) {
+    //         semesters = [...semesters, newSemester];
+    //         // semesters = [newSemester, ...semesters];
+    //         showPopup = false;
+    //         numSemesters = numSemesters + 1;
+    //     }
+    // };
+
+    // const deleteSemester = (e, id) => {
+    //     semesters = semesters.filter(semester => semester.id != id);
+    // };
 
     let gotoSemester = (e, semesterYear, semesterName) => {
         showSemester = !showSemester;
@@ -44,6 +72,7 @@
 
     let currentSemYear;
     let currentSemName;
+    
 </script>
 
 <main>
@@ -58,7 +87,19 @@
         </button>
     </div>
     <div class="SemesterList">
-        {#each semesters as semester (semester.id)}
+        <ul>
+            {#each SemesterList as semester}
+                <div class=SemesterItems>
+                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
+                    <h3><br/><br/><br/><br/>
+                    <button on:click={(e) => deleteSemester(e, semester.id)}>
+                        <img src="./images/trash.png" alt="delete" class="icon trash">
+                    </button></h3>
+                </div>
+            {/each}
+        </ul>
+        
+        <!-- {#each semesters as semester (semester.id)}
             {#if semester.id % 3 == 1}
                 <div class="SemesterItems1">
                     <button on:click={(e) => gotoSemester (e, semester.year, semester.name)} id="testButton"></button>
@@ -85,9 +126,9 @@
                     </button></h3>
                 </div>
             {/if}
-        {/each}
-        </div>
-        {/if}
+        {/each} -->
+    </div>
+    {/if}
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
@@ -98,7 +139,7 @@
 <Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester>
 
 <style>
-    #testButton{
+    /* #testButton{
         margin-inline: 10px;
         margin-bottom: 20px;
         position: absolute;
@@ -106,9 +147,7 @@
         width: 380px;
 		border-radius: 20px;
     }
-    .trash {
-        position: absolute;
-    }
+    */
     .AddButton{
         position: absolute;
         margin-left: 460px;
@@ -127,6 +166,16 @@
         color: #ffe5e5;
         cursor: pointer;
     }
+    .SemesterList {
+        position: absolute;
+        margin-left: 225px;
+        margin-top: 130px;
+    }
+    .SemesterList h3 {
+        color: #ffffff;
+        font-weight: bold;
+        margin: 20px;
+    }
     .SemesterList button, img {
         width: 25px;
         height: 25px;
@@ -134,34 +183,12 @@
         outline: none;
         background-repeat: no-repeat;
         border: 0px;
-        padding-left: 70px;
     }
     img:hover {
         width: 30px;
         height: 30px;
     }
-    
-    .SemesterList {
-        position: absolute;
-        margin-left: 280px;
-        margin-top: 130px;
-    }
-    .SemesterItems1 h3 {
-        color: #ffffff;
-        font-weight: bold;
-        margin: 20px;
-    }
-    .SemesterItems2 h3 {
-        color: #ac4949;
-        font-weight: bold;
-        margin: 20px;
-    }
-    .SemesterItems3 h3 {
-        color: #ffd9c3;
-        font-weight: bold;
-        margin: 20px;
-    }
-    .SemesterItems1 {
+    .SemesterItems {
         margin-inline: 10px;
         margin-bottom: 20px;
         display: inline-flex;
@@ -170,22 +197,8 @@
         background-color: #e28f60;
 		border-radius: 20px;
     }
-    .SemesterItems2 {
-        margin-inline: 10px;
-        margin-bottom: 20px;
-        display: inline-flex;
-        height: 170px;
-        width: 380px;
-        background-color: #ffffff;
-		border-radius: 20px;
-    }
-    .SemesterItems3 {
-        margin-inline: 10px;
-        margin-bottom: 20px;
-        display: inline-flex;
-        height: 170px;
-        width: 380px;
-        background-color: #ac4949;
-		border-radius: 20px;
+    .trash {
+        position: absolute;
+        margin-left: 130px;
     }
 </style>
