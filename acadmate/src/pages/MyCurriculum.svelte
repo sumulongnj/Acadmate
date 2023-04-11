@@ -35,33 +35,27 @@
     ];
 
     localStorage.setItem("SemesterList", JSON.stringify(TempSemesterList));
-    console.log(TempSemesterList);
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let numSemester = SemesterList.length;
-    console.log(SemesterList);
-    // let semesters = [
-    //     { name: '1st Semester', year: 2021, id: 1},
-    //     { name: '2nd Semester', year: 2021, id: 2},
-    //     { name: '1st Semester', year: 2022, id: 3},
-    //     { name: '2nd Semester', year: 2022, id: 4}
-    // ]
-    // let numSemesters = semesters.length;
 
-    // const addSemester = (e) => {
-    //     //console.log(e.detail);
-    //     const newSemester = e.detail;
+    const addSemester = (e) => {
+        //console.log(e.detail);
+        const newSemester = e.detail;
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        numSemester = SemesterList.length;
+        if (newSemester.name && newSemester.year) {
+            SemesterList = [...SemesterList, newSemester];
+            // semesters = [newSemester, ...semesters];
+            showPopup = false;
+            SemesterList = numSemester + 1;
+        }
+    };
 
-    //     if (newSemester.name && newSemester.year) {
-    //         semesters = [...semesters, newSemester];
-    //         // semesters = [newSemester, ...semesters];
-    //         showPopup = false;
-    //         numSemesters = numSemesters + 1;
-    //     }
-    // };
-
-    // const deleteSemester = (e, id) => {
-    //     semesters = semesters.filter(semester => semester.id != id);
-    // };
+    const deleteSemester = (e, id) => {
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        SemesterList = SemesterList.filter(semester => semester.id != id);
+        localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+    };
 
     let gotoSemester = (e, semesterYear, semesterName) => {
         showSemester = !showSemester;
