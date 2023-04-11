@@ -83,13 +83,21 @@
 <style>
     .AddButton{
         position: absolute;
-        margin-left: 480px;
+        margin-left: 460px;
         margin-top: 78px;
     }
     .AddButton button {
         width: 30px;
         height: 30px;
         border-radius: 100%;
+        background-color: #ac4949;
+        border: 0px;
+        font-size: 30px;
+        line-height: 0px;
+        display: flex;
+        justify-content: center;
+        color: #ffe5e5;
+        cursor: pointer;
     }
     .SemesterList button, img {
         width: 25px;
@@ -100,7 +108,6 @@
         border: 0px;
         padding-left: 70px;
     }
-
     img:hover {
         width: 30px;
         height: 30px;
