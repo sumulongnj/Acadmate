@@ -10,9 +10,14 @@
     let togglePopup = () => {
         showPopup = !showPopup;
     };
-
+    
+    if (localStorage.getItem("SemesterList") == null) {
+        let emptyArr = [];
+        localStorage.setItem("SemesterList", JSON.stringify(emptyArr));
+    }
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let numSemester = SemesterList.length;
+    console.log(SemesterList);
 
     const addSemester = (e) => {
         const newSemester = e.detail;
