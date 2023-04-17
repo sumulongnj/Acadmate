@@ -88,7 +88,6 @@
 		overflow: hidden;
 		position: fixed;
 		z-index: 1;
-		box-shadow: 0px 5px 10px lightgray;
 	}
 	.topnav a {
 		float: left;

@@ -1,40 +1,51 @@
 <script>
     import Popup from './popup.svelte';
     import AddSemForm from './AddSemForm.svelte';
+    import DelSemForm from './DelSemForm.svelte';
     import Semester from './Semester.svelte';
+    import { idAllocator } from '../stores.js';
 
     let showPopup = false;
+    let showConfirm = false;
     let showSemester = false;
     let showCurriculum = true;
+    let semDelID = 0;
 
     let togglePopup = () => {
         showPopup = !showPopup;
     };
+
+    let toggleConfirm = () => {
+        showConfirm = !showConfirm;
+    }
     
     if (localStorage.getItem("SemesterList") == null) {
-        let emptyArr = [];
-        localStorage.setItem("SemesterList", JSON.stringify(emptyArr));
+        localStorage.setItem("SemesterList", "[]");
     }
+
+    if (localStorage.getItem("SemID") == null) {
+        localStorage.setItem("SemID", "0");
+    }
+
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
-    let numSemester = SemesterList.length;
-    console.log(SemesterList);
+    let semKey = JSON.parse(localStorage.getItem("SemID"));
 
     const addSemester = (e) => {
         const newSemester = e.detail;
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
-        numSemester = SemesterList.length;
         if (newSemester.name && newSemester.year) {
+            idAllocator.increment();
+            semKey = JSON.parse(localStorage.getItem("SemID"));
             SemesterList = [...SemesterList, newSemester];
-            showPopup = false;
-            numSemester = SemesterList.length;
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+            showPopup = false;
         }
     };
 
     const deleteSemester = (e, id) => {
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
         SemesterList = SemesterList.filter(semester => semester.id != id);
-        numSemester = SemesterList.length;
+        showConfirm = false;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
     };
 
@@ -67,7 +78,7 @@
                 <div class=SemesterItems>
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
                     <h3><br/><br/><br/><br/>
-                    <button on:click={(e) => deleteSemester(e, semester.id)}>
+                    <button on:click={() => { toggleConfirm(); semDelID = semester.id}}>
                         <img src="./images/trash.png" alt="delete" class="icon trash">
                     </button></h3>
                 </div>
@@ -78,8 +89,12 @@
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
-    <AddSemForm on:addSemester={addSemester} newid={numSemester + 1}/>
+    <AddSemForm on:addSemester={addSemester} newid={semKey}/>
     <!-- <h4>HII</h4> -->
+</Popup>
+
+<Popup {showConfirm} on:click={toggleConfirm}>
+    <DelSemForm on:deleteSemester={() => {deleteSemester({}, semDelID)}}/>
 </Popup>
 
 <Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester>
@@ -113,6 +128,8 @@
         cursor: pointer;
     }
     .SemesterList {
+        display: flex;
+        flex-direction: row;
         position: absolute;
         margin-left: 225px;
         margin-top: 130px;

@@ -1,8 +1,9 @@
 <script>
     export let showPopup = false;
+    export let showConfirm = false;
 </script>
   
-{#if showPopup}
+{#if showPopup || showConfirm}
   <div class="backdrop" on:click|self>
     <div class="popup">
       <slot></slot>
@@ -15,13 +16,14 @@
       width: 100%;
       height: 100%;
       position: fixed;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.7);
     }
     .popup{
-      padding: 5px 10px 40px 50px;
+      padding: 1px 20px 20px 40px;
       border-radius: 40px;
-      max-width: 300px;
       margin: 10% auto;
+      width: max-content;
+      max-width: 300px;
       text-align: left;
       background: white;
       z-index: 5;

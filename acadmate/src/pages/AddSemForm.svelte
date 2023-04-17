@@ -1,13 +1,10 @@
 <script>
     import { createEventDispatcher } from "svelte";
     export let newid;
-
     let dispatch = createEventDispatcher();
     let year;
     let name;
-
     const handleSubmit = () => {
-        console.log(newid, name, year);
         const semester = {
             id: newid,
             name,
