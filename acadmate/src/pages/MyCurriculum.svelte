@@ -75,7 +75,8 @@
     <div class="SemesterList">
         <ul>
             {#each SemesterList as semester}
-                <div class=SemesterItems>
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div class=SemesterItems on:click={(e) => {gotoSemester(e, semester.year, semester.name)}}>
                     <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={() => { toggleConfirm(); semDelID = semester.id}}>
@@ -162,6 +163,5 @@
     }
     .trash {
         position: absolute;
-        margin-left: 130px;
     }
 </style>
