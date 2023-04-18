@@ -2,13 +2,12 @@
     import Popup from './popup.svelte';
     import AddSemForm from './AddSemForm.svelte';
     import DelSemForm from './DelSemForm.svelte';
-    import Semester from './Semester.svelte';
-    import { idAllocator } from '../stores.js';
+    import { semIdAllocator } from '../semStores.js';
+
+    
 
     let showPopup = false;
     let showConfirm = false;
-    let showSemester = false;
-    let showCurriculum = true;
     let semDelID = 0;
 
     let togglePopup = () => {
@@ -34,7 +33,7 @@
         const newSemester = e.detail;
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
         if (newSemester.name && newSemester.year) {
-            idAllocator.increment();
+            semIdAllocator.increment();
             semKey = JSON.parse(localStorage.getItem("SemID"));
             SemesterList = [...SemesterList, newSemester];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
@@ -49,20 +48,21 @@
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
     };
 
-    let gotoSemester = (e, semesterYear, semesterName) => {
-        showSemester = !showSemester;
-        showCurriculum = !showCurriculum;
-        currentSemYear = semesterYear;
-        currentSemName = semesterName;
+    let gotoSemester = (e, semesterID) => {
+        
+
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        let semesterIndex = SemesterList.findIndex(object => {
+            return object.id === semesterID;
+            });
+        localStorage.setItem("CurrentSemesterIndex", JSON.stringify(semesterIndex));
     };
 
-    let currentSemYear;
-    let currentSemName;
-    
+    console.log(SemesterList);
 </script>
 
 <main>
-    {#if showCurriculum}
+    <!-- {#if showCurriculum} -->
     <div class="Title">
         <h2>My Curriculum</h2>
     </div>
@@ -76,17 +76,18 @@
         <ul>
             {#each SemesterList as semester}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <div class=SemesterItems on:click={(e) => {gotoSemester(e, semester.year, semester.name)}}>
-                    <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
-                    <h3><br/><br/><br/><br/>
-                    <button on:click={() => { toggleConfirm(); semDelID = semester.id}}>
-                        <img src="./images/trash.png" alt="delete" class="icon trash">
-                    </button></h3>
-                </div>
+                <a href = "#/my-curriculum/semester" class = "SemesterLink">
+                    <div class=SemesterItems on:click={(e) => {gotoSemester(e, semester.id)}}>
+                        <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
+                        <h3><br/><br/><br/><br/>
+                        <button on:click={() => { toggleConfirm(); semDelID = semester.id}}>
+                            <img src="./images/trash.png" alt="delete" class="icon trash">
+                        </button></h3>
+                    </div>
+                </a>
             {/each}
         </ul>
     </div>
-    {/if}
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
@@ -98,7 +99,7 @@
     <DelSemForm on:deleteSemester={() => {deleteSemester({}, semDelID)}}/>
 </Popup>
 
-<Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester>
+<!-- <Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester> -->
 
 <style>
     /* #testButton{
@@ -128,6 +129,11 @@
         color: #ffe5e5;
         cursor: pointer;
     }
+
+    /* .deleteButton (
+        pointer-events: none;
+    ) */
+
     .SemesterList {
         display: flex;
         flex-direction: row;
@@ -148,6 +154,11 @@
         background-repeat: no-repeat;
         border: 0px;
     }
+
+    /* .SemesterLink:link {
+        position: absolute;
+    } */
+
     img:hover {
         width: 30px;
         height: 30px;

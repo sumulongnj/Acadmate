@@ -2,16 +2,14 @@
     import Popup from './popup.svelte';
     import AddClassForm from './AddClassForm.svelte';
     import DelClassForm from './DelClassForm.svelte';
-    import { idAllocator } from '../stores.js';
+    import { classIdAllocator } from '../classStores.js';
+    import { params } from 'svelte-spa-router';
 
     let showPopup = false;
     let showConfirm = false;
-    let showCurriculum = false;
     let classDelID = 0;
 
-    export let semYear;
-    export let semName;
-    export let showSemester = false;
+    
 
     let togglePopup = () => {
         showPopup = !showPopup;
@@ -21,64 +19,79 @@
         showConfirm = !showConfirm;
     }
     
-    if (localStorage.getItem("ClassList") == null) {
-        localStorage.setItem("ClassList", "[]");
-    }
+    // if (localStorage.getItem("ClassList") == null) {
+    //     localStorage.setItem("ClassList", "[]");
+    // }
 
     if (localStorage.getItem("ClassID") == null) {
         localStorage.setItem("ClassID", "0");
     }
 
-    let ClassList = JSON.parse(localStorage.getItem("ClassList"));
+    let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+    let CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
+    let ClassList = SemesterList[CurrentSemesterIndex]["classList"];
     let classKey = JSON.parse(localStorage.getItem("ClassID"));
+
+    let semYear = SemesterList[CurrentSemesterIndex]["year"];
+    let semName = SemesterList[CurrentSemesterIndex]["name"];
+
+    console.log(ClassList);
+
 
     const addClass = (e) => {
         const newClass = e.detail;
-        ClassList = JSON.parse(localStorage.getItem("ClassList"));
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
+        ClassList = SemesterList[CurrentSemesterIndex]["classList"];
         if (newClass.name) {
-            idAllocator.increment();
+            classIdAllocator.increment();
             classKey = JSON.parse(localStorage.getItem("ClassID"));
             ClassList = [...ClassList, newClass];
-            localStorage.setItem("ClassList", JSON.stringify(ClassList));
+            SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+            localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showPopup = false;
         }
+        
     };
 
     const deleteClass = (e, id) => {
-        ClassList = JSON.parse(localStorage.getItem("ClassList"));
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
+        ClassList = SemesterList[CurrentSemesterIndex]["classList"];
         ClassList = ClassList.filter(Class => Class.id != id);
         showConfirm = false;
-        localStorage.setItem("ClassList", JSON.stringify(ClassList));
+        SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+        localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
     };
     
 </script>
 
 <main>
-    {#if showSemester}
-        <div class="Title">
-            <div class="AddButton">
-                <button on:click={togglePopup}>
-                    <strong>+</strong>
-                </button>
-            </div>
-            <h2>{semYear}, {semName}</h2>
-            <h3> GWA: 1.71 </h3>
+    <!-- {#if showSemester} -->
+    <div class="Title">
+        <div class="AddButton">
+            <button on:click={togglePopup}>
+                <strong>+</strong>
+            </button>
         </div>
-        <div class="ClassList">
-            <ul>
-                {#each ClassList as Class}
-                    <!-- svelte-ignore a11y-click-events-have-key-events -->
-                    <div class="ClassItems">
-                        <h3><br/><br/><br/><br/>{Class.name}<br/>GWA: {Class.classGWA}</h3>
-                        <h3><br/><br/><br/><br/>
-                        <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
-                            <img src="./images/trash.png" alt="delete" class="icon trash">
-                        </button></h3>
-                    </div>
-                {/each}
-            </ul>
-        </div>
-    {/if}
+        <h2>{semYear}, {semName} Semester</h2>
+        <h3> GWA: 1.71 </h3>
+    </div>
+    <div class="ClassList">
+        <ul>
+            {#each ClassList as Class}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
+                <div class="ClassItems">
+                    <h3><br/><br/><br/><br/>{Class.name}<br/>GWA: {Class.classGWA}</h3>
+                    <h3><br/><br/><br/><br/>
+                    <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
+                        <img src="./images/trash.png" alt="delete" class="icon trash">
+                    </button></h3>
+                </div>
+            {/each}
+        </ul>
+    </div>
+    <!-- {/if} -->
 </main>
 
 <Popup {showPopup} on:click={togglePopup}>
