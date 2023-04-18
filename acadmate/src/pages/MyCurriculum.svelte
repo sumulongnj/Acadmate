@@ -28,6 +28,7 @@
 
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let semKey = JSON.parse(localStorage.getItem("SemID"));
+    
 
     const addSemester = (e) => {
         const newSemester = e.detail;
@@ -57,8 +58,15 @@
             });
         localStorage.setItem("CurrentSemesterIndex", JSON.stringify(semesterIndex));
     };
-
+    
+    // console.log(SemesterList.length);
     console.log(SemesterList);
+    
+    if (SemesterList.length === 0){
+        // console.log("true");
+        localStorage.setItem("SemID", "0");
+        localStorage.setItem("ClassID", "0");
+    }
 </script>
 
 <main>
@@ -80,11 +88,13 @@
                     <div class=SemesterItems on:click={(e) => {gotoSemester(e, semester.id)}}>
                         <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
                         <h3><br/><br/><br/><br/>
-                        <button on:click={() => { toggleConfirm(); semDelID = semester.id}}>
-                            <img src="./images/trash.png" alt="delete" class="icon trash">
-                        </button></h3>
+                        </h3>
                     </div>
                 </a>
+                <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
+                    <img src="./images/trash.png" alt="delete" class="icon trash">
+                </button>
+                
             {/each}
         </ul>
     </div>
@@ -155,10 +165,6 @@
         border: 0px;
     }
 
-    /* .SemesterLink:link {
-        position: absolute;
-    } */
-
     img:hover {
         width: 30px;
         height: 30px;
@@ -168,11 +174,13 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 380px;
+        width: 340px;
         background-color: #e28f60;
 		border-radius: 20px;
+        z-index: 0;
     }
     .trash {
-        position: absolute;
+        position: relative;
+        left: -70px;
     }
 </style>
