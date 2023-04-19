@@ -1,4 +1,14 @@
+<script>
+    if (localStorage.getItem("OverallGWA") == null) {
+        localStorage.setItem("OverallGWA", "0.00");
+    }
 
+    let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+
+    if (isNaN(overallGWA)){
+        overallGWA = (0.0).toFixed(4);
+    }
+</script>
 <main>
     <div class="Title">
         <h2>Grades</h2>
@@ -6,7 +16,7 @@
     <div class="GWA">
         <div style="background-color: #e28f60; color: #ffffff">
             <p class="titleGWA">Overall GWA</p>
-            <p class="numberGWA" id="overallGWA">1.55</p>
+            <p class="numberGWA" id="overallGWA">{overallGWA}</p>
         </div>
         <div style="background-color: #ffd9c3; color: #9b5f3d">
             <p class="titleGWA">Max. Attainable GWA</p>

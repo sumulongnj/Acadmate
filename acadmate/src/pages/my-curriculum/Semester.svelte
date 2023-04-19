@@ -1,8 +1,8 @@
 <script>
-    import Popup from './popup.svelte';
+    import Popup from '../popup.svelte';
     import AddClassForm from './AddClassForm.svelte';
     import DelClassForm from './DelClassForm.svelte';
-    import { classIdAllocator } from '../classStores.js';
+    import { classIdAllocator } from '../../classStores.js';
     import { params } from 'svelte-spa-router';
 
     let showPopup = false;
@@ -35,6 +35,7 @@
     let semYear = SemesterList[CurrentSemesterIndex]["year"];
     let semName = SemesterList[CurrentSemesterIndex]["name"];
     let semGWA = parseFloat(SemesterList[CurrentSemesterIndex]["gwa"]).toFixed(4);
+    let semUnits = parseInt(SemesterList[CurrentSemesterIndex]["units"]);
 
     console.log(ClassList);
 
@@ -96,7 +97,7 @@
             </button>
         </div>
         <h2>{semYear}, {semName} Semester</h2>
-        <h3> GWA: {semGWA} </h3>
+        <h3> GWA: {semGWA} Total Units: {semUnits}</h3>
     </div>
     <div class="ClassList">
         <ul>

@@ -34,7 +34,7 @@
         localStorage.setItem("TotalOverallUnits", "0");
     }
 
-    let overallGWA = parseFloat(localStorage.getItem("OverallGWA"));
+    let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
 
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let semKey = JSON.parse(localStorage.getItem("SemID"));
@@ -98,7 +98,7 @@
 
     
     let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"))
-    overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+    // overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     if (isNaN(overallGWA)){
         overallGWA = (0.0).toFixed(4);
     }

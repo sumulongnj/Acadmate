@@ -8,8 +8,7 @@
 	import Grades from './pages/Grades.svelte'; 
 	import GradeAlerts from './pages/GradeAlerts.svelte';
 	import Requirements from './pages/Requirements.svelte'; 
-	import Try from './pages/Try.svelte';
-    import Semester from './pages/Semester.svelte';
+    import Semester from './pages/my-curriculum/Semester.svelte';
 
 
     const routes = {
@@ -18,7 +17,6 @@
 		'/grades': Grades,
 		'/grade-alerts': GradeAlerts,
 		'/requirements': Requirements,
-		'/try': Try,
 		'/my-curriculum/semester': Semester
 	}
 
