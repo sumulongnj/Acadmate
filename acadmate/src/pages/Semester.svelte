@@ -103,7 +103,7 @@
             {#each ClassList as Class}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="ClassItems">
-                    <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {Class.finalGrade}</h3>
+                    <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {parseFloat(Class.finalGrade).toFixed(2)}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
                         <img src="./images/trash.png" alt="delete" class="icon trash">
