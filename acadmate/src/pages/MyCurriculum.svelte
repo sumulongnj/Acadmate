@@ -99,6 +99,9 @@
     
     let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"))
     overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+    if (isNaN(overallGWA)){
+        overallGWA = (0.0).toFixed(4);
+    }
 
 
 
