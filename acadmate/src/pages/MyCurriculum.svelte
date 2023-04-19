@@ -26,6 +26,16 @@
         localStorage.setItem("SemID", "0");
     }
 
+    if (localStorage.getItem("OverallGWA") == null) {
+        localStorage.setItem("OverallGWA", "0.00");
+    }
+
+    if (localStorage.getItem("TotalOverallUnits") == null) {
+        localStorage.setItem("TotalOverallUnits", "0");
+    }
+
+    let overallGWA = parseFloat(localStorage.getItem("OverallGWA"));
+
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let semKey = JSON.parse(localStorage.getItem("SemID"));
     
@@ -47,6 +57,8 @@
         SemesterList = SemesterList.filter(semester => semester.id != id);
         showConfirm = false;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+        computeGWA();
+        location.reload();
     };
 
     let gotoSemester = (e, semesterID) => {
@@ -66,13 +78,37 @@
         // console.log("true");
         localStorage.setItem("SemID", "0");
         localStorage.setItem("ClassID", "0");
+        let classKey = JSON.parse(localStorage.getItem("ClassID"));
+        console.log(classKey);
     }
+
+    let computeGWA = () => {
+        let totalOverallUnits = 0;
+        let totalGWA = 0;
+        for (let i = 0; i < SemesterList.length; i++){
+            totalOverallUnits += parseInt(SemesterList[i]["units"]);
+            totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseInt(SemesterList[i]["units"]));
+        }
+
+        localStorage.setItem("OverallGWA", JSON.stringify(totalGWA / totalOverallUnits));
+        localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
+    }
+
+    computeGWA();
+
+    
+    let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"))
+    overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+
+
+
 </script>
 
 <main>
     <!-- {#if showCurriculum} -->
     <div class="Title">
         <h2>My Curriculum</h2>
+        <h3> GWA: {overallGWA} Total Units: {totalOverallUnits}</h3>
     </div>
     
     <div class="AddButton">

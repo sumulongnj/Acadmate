@@ -34,6 +34,7 @@
 
     let semYear = SemesterList[CurrentSemesterIndex]["year"];
     let semName = SemesterList[CurrentSemesterIndex]["name"];
+    let semGWA = parseFloat(SemesterList[CurrentSemesterIndex]["gwa"]).toFixed(4);
 
     console.log(ClassList);
 
@@ -46,10 +47,19 @@
         if (newClass.name) {
             classIdAllocator.increment();
             classKey = JSON.parse(localStorage.getItem("ClassID"));
+            console.log(classKey);
             ClassList = [...ClassList, newClass];
             SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+            SemesterList[CurrentSemesterIndex]["units"] = parseInt(SemesterList[CurrentSemesterIndex]["units"]) + parseInt(newClass.units);
+            let totalGWA = 0;
+            for (let i = 0; i < ClassList.length; i++){
+                totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+            }
+            console.log(totalGWA);
+            SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showPopup = false;
+            location.reload();
         }
         
     };
@@ -61,7 +71,18 @@
         ClassList = ClassList.filter(Class => Class.id != id);
         showConfirm = false;
         SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+        let totalGWA = 0;
+        let totalUnits = 0;
+        for (let i = 0; i < ClassList.length; i++){
+            totalUnits += parseInt(ClassList[i]["units"]);
+            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+        }
+        // console.log(totalGWA);
+        SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / totalUnits;
+        SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+        location.reload();
+
     };
     
 </script>
@@ -75,14 +96,14 @@
             </button>
         </div>
         <h2>{semYear}, {semName} Semester</h2>
-        <h3> GWA: 1.71 </h3>
+        <h3> GWA: {semGWA} </h3>
     </div>
     <div class="ClassList">
         <ul>
             {#each ClassList as Class}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="ClassItems">
-                    <h3><br/><br/><br/><br/>{Class.name}<br/>GWA: {Class.classGWA}</h3>
+                    <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {Class.finalGrade}</h3>
                     <h3><br/><br/><br/><br/>
                     <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
                         <img src="./images/trash.png" alt="delete" class="icon trash">

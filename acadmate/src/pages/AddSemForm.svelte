@@ -10,6 +10,7 @@
             name,
             year,
             gwa: 0.00,
+            units: 0,
             classList: [],
         }
         dispatch('addSemester', semester);

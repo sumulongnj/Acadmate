@@ -3,12 +3,14 @@
     export let newid;
     let dispatch = createEventDispatcher();
     let name;
-    let classGWA;
+    let finalGrade;
+    let units;
     const handleSubmit = () => {
         const Class = {
             id: newid,
             name,
-            classGWA,
+            finalGrade,
+            units,
             assessmentList: [],
         }
         dispatch('addClass', Class);
@@ -20,7 +22,8 @@
         <h3>New Class</h3>
     </div>
     <input type="text" placeholder="Class" bind:value={name}>
-    <input type="text" placeholder="GWA" bind:value={classGWA}>
+    <input type="text" placeholder="Units" bind:value={units}>
+    <input type="text" placeholder="Final Grade" bind:value={finalGrade}>
     <button>Add</button>
 </form>
 
