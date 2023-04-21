@@ -89,8 +89,8 @@
             totalOverallUnits += parseInt(SemesterList[i]["units"]);
             totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseInt(SemesterList[i]["units"]));
         }
-        // console.log("OverallGwa", totalGWA / totalOverallUnits);
-        // console.log("Units", totalOverallUnits);
+        console.log("OverallGwa", totalGWA / totalOverallUnits);
+        console.log("Units", totalOverallUnits);
 
         localStorage.setItem("OverallGWA", JSON.stringify(totalGWA / totalOverallUnits));
         localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
@@ -109,7 +109,7 @@
         localStorage.setItem("OverallGWA", overallGWA);
         // location.reload();
     }
-    // console.log("OverallGwalol", overallGWA);
+    console.log("OverallGwalol", overallGWA);
 
 
 

@@ -82,7 +82,11 @@
             totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
         }
         // console.log(totalGWA);
-        SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / totalUnits;
+        let GWA = totalGWA / totalUnits;
+        if (isNaN(GWA)){
+            GWA = (0.0).toFixed(4);
+        }
+        SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
         SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
         location.reload();
