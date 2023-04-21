@@ -34,7 +34,7 @@
         localStorage.setItem("TotalOverallUnits", "0");
     }
 
-    let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+    
 
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let semKey = JSON.parse(localStorage.getItem("SemID"));
@@ -89,19 +89,27 @@
             totalOverallUnits += parseInt(SemesterList[i]["units"]);
             totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseInt(SemesterList[i]["units"]));
         }
+        // console.log("OverallGwa", totalGWA / totalOverallUnits);
+        // console.log("Units", totalOverallUnits);
 
         localStorage.setItem("OverallGWA", JSON.stringify(totalGWA / totalOverallUnits));
         localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
+        
     }
 
-    computeGWA();
 
-    
+    computeGWA();
+    // location.reload();
+    let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"))
     // overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     if (isNaN(overallGWA)){
+        // console.log(true);
         overallGWA = (0.0).toFixed(4);
+        localStorage.setItem("OverallGWA", overallGWA);
+        // location.reload();
     }
+    // console.log("OverallGwalol", overallGWA);
 
 
 

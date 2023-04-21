@@ -36,6 +36,9 @@
     let semName = SemesterList[CurrentSemesterIndex]["name"];
     let semGWA = parseFloat(SemesterList[CurrentSemesterIndex]["gwa"]).toFixed(4);
     let semUnits = parseInt(SemesterList[CurrentSemesterIndex]["units"]);
+    if (isNaN(semGWA)){
+        semGWA = (0.0).toFixed(4);
+    }
 
     console.log(ClassList);
 
