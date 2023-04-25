@@ -111,10 +111,11 @@
                 <div class="ClassItems">
                     <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {parseFloat(Class.finalGrade).toFixed(2)}</h3>
                     <h3><br/><br/><br/><br/>
-                    <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
-                        <img src="./images/trash.png" alt="delete" class="icon trash">
-                    </button></h3>
+                    </h3>
                 </div>
+                <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
+                    <img src="./images/trash.png" alt="delete" class="icon trash">
+                </button>
             {/each}
         </ul>
     </div>
@@ -178,11 +179,13 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 380px;
+        width: 340px;
         background-color: #e28f60;
 		border-radius: 20px;
+        z-index: 0;
     }
     .trash {
-        position: absolute;
+        position: relative;
+        left: -70px;
     }
 </style>
