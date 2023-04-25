@@ -1,14 +1,27 @@
 <script>
+    import Semester from "./my-curriculum/Semester.svelte";
+
+    // OverallGWA
     if (localStorage.getItem("OverallGWA") == null) {
         localStorage.setItem("OverallGWA", "0.00");
     }
-
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
-
     if (isNaN(overallGWA)){
         overallGWA = (0.0).toFixed(4);
     }
+
+    let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+    
+    // SemesterYears
+    let SemesterYears = new Set([]);
+    for (let i=0; i<SemesterList.length; i++) {
+        SemesterYears.add(SemesterList[i].year);
+    }
+    SemesterYears = Array.from(SemesterYears).sort();
+    console.log(SemesterYears);
+
 </script>
+
 <main>
     <div class="Title">
         <h2>Grades</h2>
@@ -23,6 +36,7 @@
             <p class="numberGWA" id="maxGWA">1.41</p>
         </div>
     </div>
+    <!-- Need to link Academic Statuses later on -->
     <div class="academicStatus">
         <h3>Academic Status</h3>
         <p>On track for</p>
@@ -40,16 +54,16 @@
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
         <label for="year">Academic Year&nbsp</label>
-        <select name="year" id="year">
-            <option value="2020">2020 - 2021</option>
-            <option value="2021">2021 - 2022</option>
-            <option value="2022">2022 - 2023</option>
+        <select name="year" id="year" onchange="yearHandler(this.value)">
+            {#each SemesterYears as year}
+                <option value={year}>{year}</option>
+            {/each}
         </select>
         <label for="semester"> &nbsp &nbsp Semester&nbsp</label>
-        <select name="semester" id="semester">
-            <option value="1">1st</option>
-            <option value="2">2nd</option>
-            <option value="3">Midyear</option>
+        <select name="semester" id="semester" onchange="semesterHandler(this.value)">
+            <option value="1st">1st</option>
+            <option value="2nd">2nd</option>
+            <option value="Midyear">Midyear</option>
         </select>
         <table>
             <tr>
@@ -133,6 +147,14 @@
             document.getElementById("onTrackFor").innerHTML += "<li class='status' style='float: left;'>" + onTrackFor[i] + "</li>";
         }
     </script> -->
+    <script>
+        function yearHandler(value) {
+            console.log(value);
+        }
+        function semesterHandler(value) {
+            console.log(value);
+        }
+    </script>
 </main>
 
 

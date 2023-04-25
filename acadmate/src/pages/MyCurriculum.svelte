@@ -32,11 +32,8 @@
         localStorage.setItem("TotalOverallUnits", "0");
     }
 
-    
-
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     let semKey = JSON.parse(localStorage.getItem("SemID"));
-    
 
     const addSemester = (e) => {
         const newSemester = e.detail;
@@ -70,14 +67,14 @@
     };
     
     // console.log(SemesterList.length);
-    console.log(SemesterList);
+    // console.log(SemesterList);
     
     if (SemesterList.length === 0){
         // console.log("true");
         localStorage.setItem("SemID", "0");
         localStorage.setItem("ClassID", "0");
         let classKey = JSON.parse(localStorage.getItem("ClassID"));
-        console.log(classKey);
+        // console.log(classKey);
     }
 
     let computeGWA = () => {
@@ -87,8 +84,8 @@
             totalOverallUnits += parseInt(SemesterList[i]["units"]);
             totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseInt(SemesterList[i]["units"]));
         }
-        console.log("OverallGwa", totalGWA / totalOverallUnits);
-        console.log("Units", totalOverallUnits);
+        // console.log("OverallGwa", totalGWA / totalOverallUnits);
+        // console.log("Units", totalOverallUnits);
 
         localStorage.setItem("OverallGWA", JSON.stringify(totalGWA / totalOverallUnits));
         localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
@@ -106,7 +103,7 @@
         localStorage.setItem("OverallGWA", overallGWA);
         // location.reload();
     }
-    console.log("OverallGwalol", overallGWA);
+    // console.log("OverallGwalol", overallGWA);
 
 
 
@@ -129,7 +126,7 @@
             {#each SemesterList as semester}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <a href = "#/my-curriculum/semester" class = "SemesterLink">
-                    <div class=SemesterItems on:click={(e) => {gotoSemester(e, semester.id)}}>
+                    <div class="SemesterItems" on:click={(e) => {gotoSemester(e, semester.id)}}>
                         <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
                         <h3><br/><br/><br/><br/>
                         </h3>
