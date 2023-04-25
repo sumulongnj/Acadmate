@@ -4,8 +4,6 @@
     import DelSemForm from './DelSemForm.svelte';
     import { semIdAllocator } from '../semStores.js';
 
-    
-
     let showPopup = false;
     let showConfirm = false;
     let semDelID = 0;
@@ -97,7 +95,6 @@
         
     }
 
-
     computeGWA();
     // location.reload();
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
@@ -119,7 +116,7 @@
     <!-- {#if showCurriculum} -->
     <div class="Title">
         <h2>My Curriculum</h2>
-        <h3> GWA: {overallGWA} Total Units: {totalOverallUnits}</h3>
+        <h3>GWA: {overallGWA} Total Units: {totalOverallUnits}</h3>
     </div>
     
     <div class="AddButton">
@@ -196,7 +193,7 @@
         flex-direction: row;
         position: absolute;
         margin-left: 225px;
-        margin-top: 130px;
+        margin-top: 160px;
     }
     .SemesterList h3 {
         color: #ffffff;

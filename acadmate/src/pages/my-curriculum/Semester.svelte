@@ -9,8 +9,6 @@
     let showConfirm = false;
     let classDelID = 0;
 
-    
-
     let togglePopup = () => {
         showPopup = !showPopup;
     };
@@ -156,7 +154,7 @@
         flex-direction: row;
         position: absolute;
         margin-left: 225px;
-        margin-top: 130px;
+        margin-top: 160px;
     }
     .ClassList h3 {
         color: #ffffff;
