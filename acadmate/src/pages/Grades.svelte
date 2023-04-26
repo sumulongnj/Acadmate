@@ -18,8 +18,25 @@
         SemesterYears.add(SemesterList[i].year);
     }
     SemesterYears = Array.from(SemesterYears).sort();
+    let selectedYear = SemesterYears[0];
+    let selectedSemester = "1st";
     console.log(SemesterYears);
 
+    function yearHandler() {
+        console.log(selectedYear);
+    }
+    function semesterHandler() {
+        console.log(selectedSemester);
+    }
+    function searchSemester(searchYear, searchSemester) {
+        let result = SemesterList.filter((semester) => {
+            return semester.name === searchSemester && semester.year === searchYear;
+        });
+        console.log(result)
+    }
+    function updateTable() {
+        searchSemester();
+    }
 </script>
 
 <main>
@@ -54,74 +71,26 @@
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
         <label for="year">Academic Year&nbsp</label>
-        <select name="year" id="year" onchange="yearHandler(this.value)">
+        <select name="year" id="year" bind:value={selectedYear} on:change={yearHandler}>
             {#each SemesterYears as year}
                 <option value={year}>{year}</option>
             {/each}
         </select>
         <label for="semester"> &nbsp &nbsp Semester&nbsp</label>
-        <select name="semester" id="semester" onchange="semesterHandler(this.value)">
+        <select name="semester" id="semester" bind:value={selectedSemester} on:change={semesterHandler}>
             <option value="1st">1st</option>
             <option value="2nd">2nd</option>
             <option value="Midyear">Midyear</option>
         </select>
-        <table>
-            <tr>
-                <th>Class</th>
-                <th>Status</th>
-                <th>Units</th>
-                <th>Grade</th>
-                <th>Target Grade</th>
-            </tr>
-            <tr>
-                <td>CS 191</td>
-                <td>65%</td>
-                <td>3.0</td>
-                <td>1.00</td>
-                <td>1.00</td>
-            </tr>
-            <tr>
-                <td>CS 138</td>
-                <td>57%</td>
-                <td>3.0</td>
-                <td>2.25</td>
-                <td>1.25</td>               
-            </tr>
-            <tr>
-                <td>CS 165</td>
-                <td>89%</td>
-                <td>4.0</td>
-                <td>1.25</td>
-                <td>1.00</td>               
-            </tr>
-            <tr>
-                <td>CS 140</td>
-                <td>89%</td>
-                <td>4.0</td>
-                <td>1.75</td>
-                <td>1.25</td>               
-            </tr>
-            <tr>
-                <td>CS 150</td>
-                <td>89%</td>
-                <td>3.0</td>
-                <td>2.75</td>
-                <td>2.75</td>               
-            </tr>
-            <tr>
-                <td>CS 133</td>
-                <td>100%</td>
-                <td>3.0</td>
-                <td>1.25</td>
-                <td>1.25</td>               
-            </tr>
-            <tr id="lastRow">
-                <td></td>
-                <td>83%</td>
-                <td>20.0</td>
-                <td>1.71</td>
-                <td>1.45</td>               
-            </tr>
+        <table id="gradesTable">
+            <thead>
+                <tr>
+                    <th>Class</th>
+                    <th>Status</th>
+                    <th>Units</th>
+                    <th>Grade</th>
+                    <th>Target Grade</th>
+                </tr>
         </table>
     </div>
 
@@ -147,14 +116,6 @@
             document.getElementById("onTrackFor").innerHTML += "<li class='status' style='float: left;'>" + onTrackFor[i] + "</li>";
         }
     </script> -->
-    <script>
-        function yearHandler(value) {
-            console.log(value);
-        }
-        function semesterHandler(value) {
-            console.log(value);
-        }
-    </script>
 </main>
 
 
