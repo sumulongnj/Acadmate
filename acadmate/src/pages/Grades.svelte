@@ -11,7 +11,7 @@
     }
 
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
-    
+    console.log(SemesterList[0])
     // SemesterYears
     let SemesterYears = new Set([]);
     for (let i=0; i<SemesterList.length; i++) {
@@ -20,23 +20,48 @@
     SemesterYears = Array.from(SemesterYears).sort();
     let selectedYear = SemesterYears[0];
     let selectedSemester = "1st";
-    console.log(SemesterYears);
 
-    function yearHandler() {
-        console.log(selectedYear);
-    }
-    function semesterHandler() {
-        console.log(selectedSemester);
+    function searchHandler() {
+        searchSemester(selectedYear, selectedSemester);
     }
     function searchSemester(searchYear, searchSemester) {
-        let result = SemesterList.filter((semester) => {
+        let result = SemesterList.filter(function(semester) {
             return semester.name === searchSemester && semester.year === searchYear;
         });
-        console.log(result)
+        if (result.length == 0) {
+            alert("No such semester exists.")
+        }
+        updateTable(result[0]);
     }
-    function updateTable() {
-        searchSemester();
+    function updateTable(semester) {
+        let classList = semester.classList;
+        let gradesTable = document.getElementById("gradesTable");
+        gradesTable.innerHTML = "<thead><tr><th>Class</th><th>Status</th><th>Units</th><th>Grade</th><th>Target Grade</th></tr></thead>";
+        for (let i=0; i<classList.length; i++) {
+            let row = gradesTable.insertRow(-1);
+            let name = row.insertCell(0);
+            let status = row.insertCell(1);
+            let units = row.insertCell(2);
+            let grade = row.insertCell(3);
+            let targetGrade = row.insertCell(4);
+            name.innerHTML = classList[i].name;
+            grade.innerHTML = classList[i].finalGrade;
+            units.innerHTML = classList[i].units;
+        }
+        let row = gradesTable.insertRow(-1);
+        row.setAttribute("id", "lastRow");
+        let name = row.insertCell(0);
+        let status = row.insertCell(1);
+        let units = row.insertCell(2);
+        let grade = row.insertCell(3);
+        let targetGrade = row.insertCell(4);
+        units.innerHTML = semester.units.toFixed(2);
+        grade.innerHTML = semester.gwa.toFixed(2);
     }
+
+    window.onload = function() {
+        searchHandler();
+    };
 </script>
 
 <main>
@@ -71,13 +96,13 @@
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
         <label for="year">Academic Year&nbsp</label>
-        <select name="year" id="year" bind:value={selectedYear} on:change={yearHandler}>
+        <select name="year" id="year" bind:value={selectedYear} on:change={searchHandler}>
             {#each SemesterYears as year}
                 <option value={year}>{year}</option>
             {/each}
         </select>
         <label for="semester"> &nbsp &nbsp Semester&nbsp</label>
-        <select name="semester" id="semester" bind:value={selectedSemester} on:change={semesterHandler}>
+        <select name="semester" id="semester" bind:value={selectedSemester} on:change={searchHandler}>
             <option value="1st">1st</option>
             <option value="2nd">2nd</option>
             <option value="Midyear">Midyear</option>
@@ -91,6 +116,7 @@
                     <th>Grade</th>
                     <th>Target Grade</th>
                 </tr>
+            </thead>
         </table>
     </div>
 
@@ -117,8 +143,6 @@
         }
     </script> -->
 </main>
-
-
 
 <style>
     /* GWA */
@@ -219,32 +243,5 @@
     }
     table {
         margin: 20px;
-    }
-    .semestralGrades td {
-        height: 20px;
-        width: 180px;
-        padding: 10px;
-        background-color: #ffd9c3;
-        text-decoration: none;
-        text-align: center;
-        line-height: 20px;
-        font-size: 20px;
-    }
-    .semestralGrades th {
-        height: 20px;
-        width: 190px;
-        padding: 10px;
-        background-color: #ac4949;
-        text-decoration: none;
-        text-align: center;
-        color: white;
-        line-height: 20px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-    #lastRow td {
-        background-color: #e28f60;
-        color: white;
-        font-weight: 600;
     }
 </style>

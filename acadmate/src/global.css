@@ -138,3 +138,32 @@ button:focus {
     margin-left: 15px;
     margin-top: -7px;
 }
+
+/* Grades Table */
+.semestralGrades td {
+	height: 20px;
+	width: 180px;
+	padding: 10px;
+	background-color: #ffd9c3;
+	text-decoration: none;
+	text-align: center;
+	line-height: 20px;
+	font-size: 20px;
+}
+.semestralGrades th {
+	height: 20px;
+	width: 190px;
+	padding: 10px;
+	background-color: #ac4949;
+	text-decoration: none;
+	text-align: center;
+	color: white;
+	line-height: 20px;
+	font-size: 20px;
+	font-weight: 600;
+}
+#lastRow td {
+	background-color: #e28f60;
+	color: white;
+	font-weight: 600;
+}
