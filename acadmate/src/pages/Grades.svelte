@@ -19,18 +19,34 @@
     }
     SemesterYears = Array.from(SemesterYears).sort();
     let selectedYear = SemesterYears[0];
-    let selectedSemester = "1st";
 
-    function searchHandler() {
+    let SemesterNames = getSemesterNames(selectedYear);
+    let selectedSemester = SemesterNames[0];
+    
+    function getSemesterNames(year) {
+        let SemesterNames = new Set([]);
+        SemesterList.forEach((semester) => {
+            if (semester.year === year) {
+                SemesterNames.add(semester.name);
+            }
+        });
+        
+        console.log(year, SemesterNames);
+        return Array.from(SemesterNames).sort();
+    }
+
+    function yearHandler() {
+        SemesterNames = getSemesterNames(selectedYear);
+        selectedSemester = SemesterNames[0];
+        searchSemester(selectedYear, selectedSemester);
+    }
+    function semesterHandler() {
         searchSemester(selectedYear, selectedSemester);
     }
     function searchSemester(searchYear, searchSemester) {
         let result = SemesterList.filter(function(semester) {
             return semester.name === searchSemester && semester.year === searchYear;
         });
-        if (result.length == 0) {
-            alert("No such semester exists.")
-        }
         updateTable(result[0]);
     }
     function updateTable(semester) {
@@ -60,7 +76,7 @@
     }
 
     window.onload = function() {
-        searchHandler();
+        yearHandler();
     };
 </script>
 
@@ -96,16 +112,16 @@
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
         <label for="year">Academic Year&nbsp</label>
-        <select name="year" id="year" bind:value={selectedYear} on:change={searchHandler}>
+        <select name="year" id="year" bind:value={selectedYear} on:change={yearHandler}>
             {#each SemesterYears as year}
                 <option value={year}>{year}</option>
             {/each}
         </select>
         <label for="semester"> &nbsp &nbsp Semester&nbsp</label>
-        <select name="semester" id="semester" bind:value={selectedSemester} on:change={searchHandler}>
-            <option value="1st">1st</option>
-            <option value="2nd">2nd</option>
-            <option value="Midyear">Midyear</option>
+        <select name="semester" id="semester" bind:value={selectedSemester} on:change={semesterHandler}>
+            {#each SemesterNames as name}
+                <option value={name}>{name}</option>
+            {/each}
         </select>
         <table id="gradesTable">
             <thead>
