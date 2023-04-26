@@ -1,6 +1,4 @@
 <script>
-    import Semester from "./my-curriculum/Semester.svelte";
-
     // OverallGWA
     if (localStorage.getItem("OverallGWA") == null) {
         localStorage.setItem("OverallGWA", "0.00");
@@ -18,10 +16,16 @@
         SemesterYears.add(SemesterList[i].year);
     }
     SemesterYears = Array.from(SemesterYears).sort();
-    let selectedYear = SemesterYears[0];
+    if (localStorage.getItem("SelectedYear") == null) {
+        localStorage.setItem("SelectedYear", JSON.stringify(SemesterYears[0]));
+    }
+    let selectedYear = localStorage.getItem("SelectedYear");
 
     let SemesterNames = getSemesterNames(selectedYear);
-    let selectedSemester = SemesterNames[0];
+    if (localStorage.getItem("SelectedName") == null) {
+        localStorage.setItem("SelectedName", JSON.stringify(SemesterNames[0]));
+    }
+    let selectedSemester = localStorage.getItem("SelectedName");
     
     function getSemesterNames(year) {
         let SemesterNames = new Set([]);
@@ -77,7 +81,7 @@
 
     window.onload = function() {
         yearHandler();
-    };
+    }
 </script>
 
 <main>

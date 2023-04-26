@@ -10,7 +10,6 @@
 	import Requirements from './pages/Requirements.svelte'; 
     import Semester from './pages/my-curriculum/Semester.svelte';
 
-
     const routes = {
 		'/': Dashboard,
 		'/my-curriculum': MyCurriculum,
