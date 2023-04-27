@@ -45,6 +45,7 @@
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showPopup = false;
         }
+        location.reload();
     };
 
     const deleteSemester = (e, id) => {
