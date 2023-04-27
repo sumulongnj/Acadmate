@@ -1,10 +1,10 @@
 <script>
-  export let showPopup = false;
-  export let showPopup2 = false;
+  export let showDelete = false;
+  export let showEdit = false;
   export let showConfirm = false;
 </script>
 
-{#if showPopup || showPopup2 || showConfirm}
+{#if showDelete || showEdit || showConfirm}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="backdrop" on:click|self>
   <div class="popup">

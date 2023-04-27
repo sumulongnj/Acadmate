@@ -3,21 +3,20 @@
     import AddSemForm from './AddSemForm.svelte';
     import EditSemForm from './EditSemForm.svelte';    
     import DelSemForm from './DelSemForm.svelte';
-    import { semIdAllocator } from '../semStores.js';
-
-    let showPopup = false;
-    let showPopup2 = false;
+    import { semIdAllocator} from '../semStores.js';
+    let showDelete = false;
+    let showEdit = false;
     let showConfirm = false;
     let semDelID = 0;
     let semEditID = 0;
     let index = 0;
 
-    let togglePopup = () => {
-        showPopup = !showPopup;
+    let toggleDelete = () => {
+        showDelete = !showDelete;
     };
 
-    let togglePopup2 = () => {
-        showPopup2 = !showPopup2;
+    let toggleEdit = () => {
+        showEdit = !showEdit;
     };
 
     let toggleConfirm = () => {
@@ -46,12 +45,13 @@
     const addSemester = (e) => {
         const newSemester = e.detail;
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
-        if (newSemester.name && newSemester.year) {
+        const index = SemesterList.findIndex(semester => semester.name === newSemester.name && semester.year === newSemester.year);
+        if (index === -1 && newSemester.name && newSemester.year) {
             semIdAllocator.increment();
             semKey = JSON.parse(localStorage.getItem("SemID"));
             SemesterList = [...SemesterList, newSemester];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
-            showPopup = false;
+            showDelete = false;
             location.reload();
         }
     };
@@ -61,13 +61,16 @@
         const index = SemesterList.findIndex(semester => semester.id === id);
         if (index !== -1) {
             const updatedSemester = e.detail;
-            SemesterList[index] = {
-                ...SemesterList[index], 
-                name: updatedSemester.name,
-                year: updatedSemester.year
-            };
-            localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
-            showPopup2 = false;
+            const checkIndex = SemesterList.findIndex(semester => semester.name === updatedSemester.name && semester.year === updatedSemester.year);
+            if (checkIndex === -1) {
+                SemesterList[index] = {
+                    ...SemesterList[index], 
+                    name: updatedSemester.name,
+                    year: updatedSemester.year
+                };
+                localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+                showEdit = false;
+            }
         }
     };
 
@@ -141,7 +144,7 @@
     </div>
     
     <div class="AddButton">
-        <button on:click={togglePopup}>
+        <button on:click={toggleDelete}>
             <strong>+</strong>
         </button>
     </div>
@@ -156,21 +159,22 @@
                         </h3>
                     </div>
                 </a>
-                <button on:click={() => {togglePopup2(); semEditID = semester.id}}><strong>...</strong></button>
-                <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
-                    <img src="./images/trash.png" alt="delete" class="icon trash">
-                </button>
-                
+            <button on:click={() => {toggleEdit(); semEditID = semester.id}}>
+                <img src="./images/edit.png" alt="edit">
+            </button>
+            <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
+                <img src="./images/trash.png" alt="delete">
+            </button>
             {/each}
         </ul>
     </div>
 </main>
 
-<Popup {showPopup} on:click={togglePopup}>
+<Popup {showDelete} on:click={toggleDelete}>
     <AddSemForm on:addSemester={addSemester} newid={semKey}/>
 </Popup>
 
-<Popup {showPopup2} on:click={togglePopup2}>
+<Popup {showEdit} on:click={toggleEdit}>
     <EditSemForm on:editSemester={updatedSemester => editSemester(updatedSemester, semEditID)} semester={SemesterList[index]} />
 </Popup>  
 
@@ -248,8 +252,8 @@
 		border-radius: 20px;
         z-index: 0;
     }
-    .trash {
+    .SemesterList button {
         position: relative;
-        left: -70px;
+        right: 85px;
     }
 </style>

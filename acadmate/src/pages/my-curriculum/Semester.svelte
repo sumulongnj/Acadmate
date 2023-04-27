@@ -2,15 +2,23 @@
     import Popup from '../popup.svelte';
     import AddClassForm from './AddClassForm.svelte';
     import DelClassForm from './DelClassForm.svelte';
+    import EditClassForm from './EditClassForm.svelte';
     import { classIdAllocator } from '../../classStores.js';
     import { params } from 'svelte-spa-router';
 
-    let showPopup = false;
+    let showDelete = false;
     let showConfirm = false;
+    let showEdit = false;
     let classDelID = 0;
-
+    let classEditID = 0;
+    let index = 0;
+    
     let togglePopup = () => {
-        showPopup = !showPopup;
+        showDelete = !showDelete;
+    };
+
+    let toggleEdit = () => {
+        showEdit = !showEdit;
     };
 
     let toggleConfirm = () => {
@@ -46,7 +54,8 @@
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
         CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
         ClassList = SemesterList[CurrentSemesterIndex]["classList"];
-        if (newClass.name) {
+        const index = ClassList.findIndex(sub => sub.name === newClass.name);
+        if (index === -1 && newClass.name) {
             classIdAllocator.increment();
             classKey = JSON.parse(localStorage.getItem("ClassID"));
             console.log(classKey);
@@ -60,10 +69,33 @@
             console.log(totalGWA);
             SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
-            showPopup = false;
+            showDelete = false;
             location.reload();
         }
         
+    };
+
+
+    const editClass = (e, id) => {
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
+        ClassList = SemesterList[CurrentSemesterIndex]["classList"];
+        const index = ClassList.findIndex(sub => sub.id === id);
+        if (index !== -1) {
+            const updatedClass = e.detail;
+            const checkIndex = ClassList.findIndex(sub => sub.name === updatedClass.name && sub.id !== updatedClass.id);
+            if (checkIndex === -1) {
+                ClassList[index] = {
+                    ...ClassList[index], 
+                    name: updatedClass.name,
+                    units: updatedClass.units,
+                    finalGrade: updatedClass.finalGrade
+                };
+                SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+                localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+                showEdit = false;
+            }
+        }
     };
 
     const deleteClass = (e, id) => {
@@ -113,6 +145,9 @@
                     <h3><br/><br/><br/><br/>
                     </h3>
                 </div>
+                <button on:click={() => {toggleEdit(); classEditID = Class.id}}>
+                    <img src="./images/edit.png" alt="edit">
+                </button>
                 <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
                     <img src="./images/trash.png" alt="delete" class="icon trash">
                 </button>
@@ -122,10 +157,14 @@
     <!-- {/if} -->
 </main>
 
-<Popup {showPopup} on:click={togglePopup}>
+<Popup {showDelete} on:click={togglePopup}>
     <AddClassForm on:addClass={addClass} newid={classKey}/>
     <!-- <h4>HII</h4> -->
 </Popup>
+
+<Popup {showEdit} on:click={toggleEdit}>
+    <EditClassForm on:editClass={updatedClass => editClass(updatedClass, classEditID)} sub={ClassList[index]} />
+</Popup>  
 
 <Popup {showConfirm} on:click={toggleConfirm}>
     <DelClassForm on:deleteClass={() => {deleteClass({}, classDelID)}}/>
@@ -184,8 +223,8 @@
 		border-radius: 20px;
         z-index: 0;
     }
-    .trash {
+    .ClassList button {
         position: relative;
-        left: -70px;
+        right: 85px;
     }
 </style>
