@@ -96,6 +96,7 @@
                 showEdit = false;
             }
         }
+        computeGWA();
     };
 
     const deleteClass = (e, id) => {
@@ -122,6 +123,30 @@
         location.reload();
 
     };
+
+    const computeGWA = () => {
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        CurrentSemesterIndex = JSON.parse(localStorage.getItem("CurrentSemesterIndex"));
+        ClassList = SemesterList[CurrentSemesterIndex]["classList"];
+        // ClassList = ClassList.filter(Class => Class.id != id);
+        // showConfirm = false;
+        SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
+        let totalGWA = 0;
+        let totalUnits = 0;
+        for (let i = 0; i < ClassList.length; i++){
+            totalUnits += parseInt(ClassList[i]["units"]);
+            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+        }
+        // console.log(totalGWA);
+        let GWA = totalGWA / totalUnits;
+        if (isNaN(GWA)){
+            GWA = (0.0).toFixed(4);
+        }
+        SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
+        SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
+        localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+        location.reload();
+    }
     
 </script>
 

@@ -54,7 +54,12 @@
         updateTable(result[0]);
     }
     function updateTable(semester) {
-        let classList = semester.classList;
+        console.log(semester);
+        if (typeof semester === 'undefined'){
+            return;
+        }
+        let classList = semester["classList"];
+        console.log(classList)
         let gradesTable = document.getElementById("gradesTable");
         gradesTable.innerHTML = "<thead><tr><th>Class</th><th>Status</th><th>Units</th><th>Grade</th><th>Target Grade</th></tr></thead>";
         for (let i=0; i<classList.length; i++) {
