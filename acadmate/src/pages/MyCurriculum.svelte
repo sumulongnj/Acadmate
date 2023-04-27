@@ -1,15 +1,23 @@
 <script>
     import Popup from './popup.svelte';
     import AddSemForm from './AddSemForm.svelte';
+    import EditSemForm from './EditSemForm.svelte';    
     import DelSemForm from './DelSemForm.svelte';
     import { semIdAllocator } from '../semStores.js';
 
     let showPopup = false;
+    let showPopup2 = false;
     let showConfirm = false;
     let semDelID = 0;
+    let semEditID = 0;
+    let index = 0;
 
     let togglePopup = () => {
         showPopup = !showPopup;
+    };
+
+    let togglePopup2 = () => {
+        showPopup2 = !showPopup2;
     };
 
     let toggleConfirm = () => {
@@ -45,6 +53,21 @@
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showPopup = false;
             location.reload();
+        }
+    };
+
+    const editSemester = (e, id) => {
+        SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
+        const index = SemesterList.findIndex(semester => semester.id === id);
+        if (index !== -1) {
+            const updatedSemester = e.detail;
+            SemesterList[index] = {
+                ...SemesterList[index], 
+                name: updatedSemester.name,
+                year: updatedSemester.year
+            };
+            localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+            showPopup2 = false;
         }
     };
 
@@ -133,6 +156,7 @@
                         </h3>
                     </div>
                 </a>
+                <button on:click={() => {togglePopup2(); semEditID = semester.id}}><strong>...</strong></button>
                 <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
                     <img src="./images/trash.png" alt="delete" class="icon trash">
                 </button>
@@ -144,8 +168,11 @@
 
 <Popup {showPopup} on:click={togglePopup}>
     <AddSemForm on:addSemester={addSemester} newid={semKey}/>
-    <!-- <h4>HII</h4> -->
 </Popup>
+
+<Popup {showPopup2} on:click={togglePopup2}>
+    <EditSemForm on:editSemester={updatedSemester => editSemester(updatedSemester, semEditID)} semester={SemesterList[index]} />
+</Popup>  
 
 <Popup {showConfirm} on:click={toggleConfirm}>
     <DelSemForm on:deleteSemester={() => {deleteSemester({}, semDelID)}}/>
