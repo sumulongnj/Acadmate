@@ -18,9 +18,7 @@
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-    <div style="color: #ac4949; font-size: 25px;">
-        <h3>New Class</h3>
-    </div>
+    <h3 style="color: #ac4949">New Class</h3>
     <input type="text" placeholder="Class" bind:value={name}>
     <input type="text" placeholder="Units" bind:value={units}>
     <input type="text" placeholder="Final Grade" bind:value={finalGrade}>

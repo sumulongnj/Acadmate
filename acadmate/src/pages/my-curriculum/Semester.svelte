@@ -101,7 +101,7 @@
                 <strong>+</strong>
             </button>
         </div>
-        <h2>{semYear}, {semName} Semester</h2>
+        <h2>{semYear}, {semName}</h2>
         <h3> GWA: {semGWA} Total Units: {semUnits}</h3>
     </div>
     <div class="ClassList">

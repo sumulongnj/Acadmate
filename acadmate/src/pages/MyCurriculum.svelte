@@ -44,8 +44,8 @@
             SemesterList = [...SemesterList, newSemester];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showPopup = false;
+            location.reload();
         }
-        location.reload();
     };
 
     const deleteSemester = (e, id) => {
@@ -128,7 +128,7 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <a href = "#/my-curriculum/semester" class = "SemesterLink">
                     <div class="SemesterItems" on:click={(e) => {gotoSemester(e, semester.id)}}>
-                        <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name} Semester</h3>
+                        <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
                         <h3><br/><br/><br/><br/>
                         </h3>
                     </div>

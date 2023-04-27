@@ -1,31 +1,42 @@
 <script>
-    import { createEventDispatcher } from "svelte";
-    export let newid;
-    let dispatch = createEventDispatcher();
-    let year;
-    let name;
-    const handleSubmit = () => {
-        const semester = {
-            id: newid,
-            name,
-            year,
-            gwa: 0.00,
-            units: 0,
-            classList: [],
-        }
-        dispatch('addSemester', semester);
+  import { createEventDispatcher } from "svelte";
+  export let newid;
+  let dispatch = createEventDispatcher();
+  let year;
+  let name;
+  const handleSubmit = () => {
+    const semester = {
+      id: newid,
+      name,
+      year,
+      gwa: 0.00,
+      units: 0,
+      classList: [],
     };
+    dispatch('addSemester', semester);
+  };
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-    <div style="color: #ac4949; font-size: 25px;">
-        <h3>New Semester</h3>
-    </div>
-    <input type="text" placeholder="Year" bind:value={year}>
-    <input type="text" placeholder="Semester" bind:value={name}>
-    <button>Add</button>
+  <h3 style="color: #ac4949">New Semester</h3>
+  <div>
+  <input type="text" placeholder="Year" bind:value={year}>
+  <button>Add</button>
+  <div>
+    <button on:click|preventDefault={() => name = "1st Semester"} class:selected={name === "1st Semester"}>1st</button>
+    <button on:click|preventDefault={() => name = "2nd Semester"} class:selected={name === "2nd Semester"}>2nd</button>
+    <button on:click|preventDefault={() => name = "Midyear"} class:selected={name === "Midyear"}>Midyear</button>
+  </div>
+  </div>
 </form>
 
 <style>
-    
+  .selected {
+    background-color: #ac4949;
+    color: white;
+  }
+  input {
+    width: 160px;
+  }
+
 </style>
