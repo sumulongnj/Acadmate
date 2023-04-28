@@ -41,7 +41,7 @@
     let semYear = SemesterList[CurrentSemesterIndex]["year"];
     let semName = SemesterList[CurrentSemesterIndex]["name"];
     let semGWA = parseFloat(SemesterList[CurrentSemesterIndex]["gwa"]).toFixed(4);
-    let semUnits = parseInt(SemesterList[CurrentSemesterIndex]["units"]);
+    let semUnits = parseFloat(SemesterList[CurrentSemesterIndex]["units"]);
     if (isNaN(semGWA)){
         semGWA = (0.0).toFixed(4);
     }
@@ -61,10 +61,10 @@
             console.log(classKey);
             ClassList = [...ClassList, newClass];
             SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
-            SemesterList[CurrentSemesterIndex]["units"] = parseInt(SemesterList[CurrentSemesterIndex]["units"]) + parseInt(newClass.units);
+            SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
             let totalGWA = 0;
             for (let i = 0; i < ClassList.length; i++){
-                totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+                totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
             }
             console.log(totalGWA);
             SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
@@ -109,8 +109,8 @@
         let totalGWA = 0;
         let totalUnits = 0;
         for (let i = 0; i < ClassList.length; i++){
-            totalUnits += parseInt(ClassList[i]["units"]);
-            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+            totalUnits += parseFloat(ClassList[i]["units"]);
+            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
         }
         // console.log(totalGWA);
         let GWA = totalGWA / totalUnits;
@@ -134,8 +134,8 @@
         let totalGWA = 0;
         let totalUnits = 0;
         for (let i = 0; i < ClassList.length; i++){
-            totalUnits += parseInt(ClassList[i]["units"]);
-            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseInt(ClassList[i]["units"]));
+            totalUnits += parseFloat(ClassList[i]["units"]);
+            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
         }
         // console.log(totalGWA);
         let GWA = totalGWA / totalUnits;
@@ -170,7 +170,7 @@
                     <h3><br/><br/><br/><br/>
                     </h3>
                 </div>
-                <button on:click={() => {toggleEdit(); classEditID = Class.id}}>
+                <button on:click={() => {toggleEdit(); classEditID = Class.id; index = ClassList.findIndex(sub => sub.id === classEditID)}}>
                     <img src="./images/edit.png" alt="edit">
                 </button>
                 <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>

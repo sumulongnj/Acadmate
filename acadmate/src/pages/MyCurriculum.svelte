@@ -159,7 +159,7 @@
                         </h3>
                     </div>
                 </a>
-            <button on:click={() => {toggleEdit(); semEditID = semester.id}}>
+            <button on:click={() => {toggleEdit(); semEditID = semester.id; index = SemesterList.findIndex(semester => semester.id === semEditID)}}>
                 <img src="./images/edit.png" alt="edit">
             </button>
             <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
