@@ -8,6 +8,15 @@
         overallGWA = (0.0).toFixed(4);
     }
 
+    // MaxGWA
+    if (localStorage.getItem("MaxGWA") == null) {
+        localStorage.setItem("MaxGWA", "0.00");
+    }
+    let maxGWA = parseFloat(localStorage.getItem("MaxGWA")).toFixed(4);
+    if (isNaN(maxGWA)){
+        maxGWA = (0.0).toFixed(4);
+    }
+
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     console.log(SemesterList[0])
     // SemesterYears
@@ -100,7 +109,7 @@
         </div>
         <div style="background-color: #ffd9c3; color: #9b5f3d">
             <p class="titleGWA">Max. Attainable GWA</p>
-            <p class="numberGWA" id="maxGWA">1.41</p>
+            <p class="numberGWA" id="maxGWA">{maxGWA}</p>
         </div>
     </div>
     <!-- Need to link Academic Statuses later on -->

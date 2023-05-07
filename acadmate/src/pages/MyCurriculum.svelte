@@ -122,7 +122,7 @@
     computeGWA();
     // location.reload();
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
-    let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"))
+    let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"));
     // overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     if (isNaN(overallGWA)){
         // console.log(true);
@@ -132,7 +132,17 @@
     }
     // console.log("OverallGwalol", overallGWA);
 
+    let computeMaxGWA = () => {
+        let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"));
+        let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+        let remainingOverallUnits = 148 - totalOverallUnits;
+        let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
+        console.log(maxGWA);
 
+        localStorage.setItem("MaxGWA", JSON.stringify(maxGWA));
+    }
+    
+    computeMaxGWA();
 
 </script>
 
