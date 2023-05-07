@@ -95,7 +95,37 @@
 
     window.onload = function() {
         yearHandler();
+        let onTrackForList = document.getElementById("onTrackFor");
+        let canStillAttainList = document.getElementById("canStillAttain");
+  
+        if (1.20 >= overallGWA && overallGWA >= 1.00) {
+            console.log(overallGWA);
+            onTrackForList.innerHTML += "<li class='latin'>Summa Cum Laude</li>";
+            onTrackForList.innerHTML += "<li class='scholar'>University Scholar</li>";
+        }
+        else if (1.45 >= overallGWA && overallGWA >= 1.21) {
+            onTrackForList.innerHTML += "<li class='latin'>Magna Cum Laude</li>";
+            onTrackForList.innerHTML += "<li class='scholar'>University Scholar</li>";
+        }
+        else if (1.75 >= overallGWA && overallGWA >= 1.46) {
+            onTrackForList.innerHTML += "<li class='latin'>Cum Laude</li>";
+            onTrackForList.innerHTML += "<li class='scholar'>College Scholar</li>";
+        }
+  
+        if (1.20 >= maxGWA && maxGWA >= 1.00) {
+            canStillAttainList.innerHTML += "<li class='latin'>Summa Cum Laude</li>";
+            canStillAttainList.innerHTML += "<li class='scholar'>University Scholar</li>";
+        }
+        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
+            canStillAttainList.innerHTML += "<li class='latin'>Magna Cum Laude</li>";
+            canStillAttainList.innerHTML += "<li class='scholar'>University Scholar</li>";
+        }
+        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
+            canStillAttainList.innerHTML += "<li class='latin'>Cum Laude</li>";
+            canStillAttainList.innerHTML += "<li class='scholar'>College Scholar</li>";
+        }
     }
+
 </script>
 
 <main>
@@ -116,16 +146,9 @@
     <div class="academicStatus">
         <h3>Academic Status</h3>
         <p>On track for</p>
-        <ul id="onTrackFor">
-            <li class="latin">Cum Laude</li>
-            <li class="scholar">College Scholar</li>
-        </ul>
+        <ul id="onTrackFor"></ul>
         <p>Can still attain</p>
-        <ul id="canStillAttain">
-            <li class="latin">Summa Cum Laude</li>
-            <li class="latin">Magna Cum Laude</li>
-            <li class="scholar">University Scholar</li>
-        </ul>
+        <ul id="canStillAttain"></ul>
     </div>
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
