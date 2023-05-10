@@ -125,7 +125,7 @@
             scholarStatus = "University Scholar";
         }
         else if (1.75 >= OverallGWA && OverallGWA >= 1.46) {
-            latinStatus = "Magna Cum Laude";
+            latinStatus = "Cum Laude";
             scholarStatus = "College Scholar";
         }
         localStorage.setItem("OverallGWA", JSON.stringify(OverallGWA));
