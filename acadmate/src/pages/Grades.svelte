@@ -17,6 +17,30 @@
         maxGWA = (0.0).toFixed(4);
     }
 
+    // CurrLatinStatus
+    if (localStorage.getItem("CurrLatinStatus") == null) {
+        localStorage.setItem("CurrLatinStatus", "-");
+    }
+    let currLatinStatus = JSON.parse(localStorage.getItem("CurrLatinStatus"));
+
+    // CurrScholarStatus
+    if (localStorage.getItem("CurrScholarStatus") == null) {
+        localStorage.setItem("CurrScholarStatus", "-");
+    }
+    let currScholarStatus = JSON.parse(localStorage.getItem("CurrScholarStatus"));
+
+    // MaxLatinStatus
+    if (localStorage.getItem("MaxLatinStatus") == null) {
+        localStorage.setItem("MaxLatinStatus", "-");
+    }
+    let maxLatinStatus = JSON.parse(localStorage.getItem("MaxLatinStatus"));
+
+    // MaxScholarStatus
+    if (localStorage.getItem("MaxScholarStatus") == null) {
+        localStorage.setItem("MaxScholarStatus", "-");
+    }
+    let maxScholarStatus = JSON.parse(localStorage.getItem("MaxScholarStatus"));
+
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     console.log(SemesterList[0])
     // SemesterYears
@@ -97,35 +121,8 @@
         yearHandler();
         let onTrackForList = document.getElementById("onTrackFor");
         let canStillAttainList = document.getElementById("canStillAttain");
-  
-        if (1.20 >= overallGWA && overallGWA >= 1.00) {
-            console.log(overallGWA);
-            onTrackForList.innerHTML += "<li class='latin'>Summa Cum Laude</li>";
-            onTrackForList.innerHTML += "<li class='scholar'>University Scholar</li>";
-        }
-        else if (1.45 >= overallGWA && overallGWA >= 1.21) {
-            onTrackForList.innerHTML += "<li class='latin'>Magna Cum Laude</li>";
-            onTrackForList.innerHTML += "<li class='scholar'>University Scholar</li>";
-        }
-        else if (1.75 >= overallGWA && overallGWA >= 1.46) {
-            onTrackForList.innerHTML += "<li class='latin'>Cum Laude</li>";
-            onTrackForList.innerHTML += "<li class='scholar'>College Scholar</li>";
-        }
-  
-        if (1.20 >= maxGWA && maxGWA >= 1.00) {
-            canStillAttainList.innerHTML += "<li class='latin'>Summa Cum Laude</li>";
-            canStillAttainList.innerHTML += "<li class='scholar'>University Scholar</li>";
-        }
-        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
-            canStillAttainList.innerHTML += "<li class='latin'>Magna Cum Laude</li>";
-            canStillAttainList.innerHTML += "<li class='scholar'>University Scholar</li>";
-        }
-        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
-            canStillAttainList.innerHTML += "<li class='latin'>Cum Laude</li>";
-            canStillAttainList.innerHTML += "<li class='scholar'>College Scholar</li>";
-        }
+        // location.reload();
     }
-
 </script>
 
 <main>
@@ -147,12 +144,18 @@
         <h3>Academic Status</h3>
         <div>
             <p>On track for</p>
-            <ul id="onTrackFor"></ul>
+            <ul id="onTrackFor">
+                <li class="latin">{currLatinStatus}</li>
+                <li class="scholar">{currScholarStatus}</li>
+            </ul>
             <span class="clear"></span>
         </div>
         <div>
             <p>Can still attain</p>
-            <ul id="canStillAttain"></ul>
+            <ul id="canStillAttain">
+                <li class="latin">{maxLatinStatus}</li>
+                <li class="scholar">{maxScholarStatus}</li>
+            </ul>
             <span class="clear"></span>
         </div>
         
@@ -183,7 +186,7 @@
             </thead>
         </table>
     </div>
-
+    
 </main>
 
 <style>
