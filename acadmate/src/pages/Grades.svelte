@@ -145,10 +145,17 @@
     <!-- Need to link Academic Statuses later on -->
     <div class="academicStatus">
         <h3>Academic Status</h3>
-        <p>On track for</p>
-        <ul id="onTrackFor"></ul>
-        <p>Can still attain</p>
-        <ul id="canStillAttain"></ul>
+        <div>
+            <p>On track for</p>
+            <ul id="onTrackFor"></ul>
+            <span class="clear"></span>
+        </div>
+        <div>
+            <p>Can still attain</p>
+            <ul id="canStillAttain"></ul>
+            <span class="clear"></span>
+        </div>
+        
     </div>
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>
@@ -177,28 +184,6 @@
         </table>
     </div>
 
-    <!-- <script>
-        let overallGWA = 1.00; // change later on
-        let maxGWA = 1.00; // change later on
-        overallGWA = overallGWA.toFixed(2);
-        maxGWA = maxGWA.toFixed(2);
-        document.getElementById("overallGWA").innerHTML = overallGWA;
-        document.getElementById("maxGWA").innerHTML = maxGWA;
-        
-        let onTrackFor = [];
-        let canStillAttain = [];
-        if (overallGWA < 1.25) {
-            onTrackFor[onTrackFor.length] = "Summa Cum Laude";
-            onTrackFor[onTrackFor.length] = "Magna Cum Laude";
-            onTrackFor[onTrackFor.length] = "Cum Laude";
-        }
-        for (var i=0; i<onTrackFor.length; i++) {
-            if (i == onTrackFor.length - 1) {
-                document.getElementById("onTrackFor").innerHTML += "<li class='status'>" + onTrackFor[i] + "</li>";
-            }
-            document.getElementById("onTrackFor").innerHTML += "<li class='status' style='float: left;'>" + onTrackFor[i] + "</li>";
-        }
-    </script> -->
 </main>
 
 <style>
@@ -227,52 +212,6 @@
     .numberGWA {
         float: right;
         font-weight: bold;
-    }
-
-    /* Academic Status */
-    .academicStatus {
-        position: absolute;
-        height: 230px;
-        width: 770px;
-        overflow: auto;
-        top: 130px;
-	    left: 600px;
-        background-color: #ffffff;
-        text-decoration: none;
-		border-radius: 20px;
-        margin: 10px;
-        box-shadow: 0px 4px 7px lightgray;
-    }
-    .academicStatus h3 {
-        font-weight: bold;
-        margin: 20px;
-    }
-    .academicStatus p {
-        margin: 20px;
-        float: left;
-    }
-    .academicStatus ul {
-        list-style-type: none;
-    }
-    .academicStatus li {
-        display: inline-block;
-        height: 50px;
-		border-radius: 20px;
-        margin: 7px;
-        padding: 0px 15px;
-        box-shadow: 0px 4px 7px lightgray;
-        text-decoration: none;
-        text-align: center;
-        line-height: 50px;
-        color: white;
-        font-weight: bold;
-        font-size: 17px;
-    }
-    .latin {
-        background-color: #e28f60;
-    }
-    .scholar {
-        background-color: #898989;
     }
 
     /* Semestral Grades Table */

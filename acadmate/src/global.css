@@ -167,3 +167,52 @@ button:focus {
 	color: white;
 	font-weight: 600;
 }
+
+/* Academic Status */
+.academicStatus {
+	position: absolute;
+	height: 230px;
+	width: 770px;
+	overflow: auto;
+	top: 130px;
+	left: 600px;
+	background-color: #ffffff;
+	text-decoration: none;
+	border-radius: 20px;
+	margin: 10px;
+	box-shadow: 0px 4px 7px lightgray;
+}
+.academicStatus h3 {
+	font-weight: bold;
+	margin: 20px;
+}
+.academicStatus p {
+	margin: 20px;
+	float: left;
+}
+.academicStatus ul {
+	list-style-type: none;
+}
+.academicStatus li {
+	display: inline-block;
+	height: 50px;
+	border-radius: 20px;
+	margin: 7px;
+	padding: 0px 15px;
+	box-shadow: 0px 4px 7px lightgray;
+	text-decoration: none;
+	text-align: center;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+	font-size: 17px;
+}
+.latin {
+	background-color: #e28f60;
+}
+.scholar {
+	background-color: #898989;
+}
+span.clear { 
+	clear: left; display: block; 
+}
