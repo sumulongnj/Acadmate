@@ -174,7 +174,7 @@
                     <img src="./images/edit.png" alt="edit">
                 </button>
                 <button on:click={() => { toggleConfirm(); classDelID = Class.id}}>
-                    <img src="./images/trash.png" alt="delete" class="icon trash">
+                    <img src="./images/trash.png" alt="delete">
                 </button>
             {/each}
         </ul>
