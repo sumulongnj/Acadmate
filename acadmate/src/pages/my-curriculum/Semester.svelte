@@ -57,11 +57,12 @@
         const index = ClassList.findIndex(sub => sub.name === newClass.name);
         if (index === -1 && newClass.name) {
             classIdAllocator.increment();
-            classKey = JSON.parse(localStorage.getItem("ClassID"));
-            console.log(classKey);
+            classKey = JSON.parse(localStorage.getItem("ClassID")); 
             ClassList = [...ClassList, newClass];
             SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
-            SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
+            if (SemesterList[CurrentSemesterIndex]["isCredited"] === true) {
+                SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
+            }
             let totalGWA = 0;
             for (let i = 0; i < ClassList.length; i++){
                 if (ClassList[i]["isCredited"]) {
@@ -71,7 +72,7 @@
             SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showDelete = false;
-            location.reload();
+            computeGWA();
         }
         
     };

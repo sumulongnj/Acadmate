@@ -5,6 +5,7 @@
     let name;
     let finalGrade;
     let units;
+    let isCredited = true;
     let gradeOptions = ["1.00", "1.25", "1.50", "1.75", "2.00", "2.25", "2.50", "2.75", "3.00", "4.00", "5.00", "DRP", "INC", "0.00"];
     
     const handleSubmit = () => {
@@ -13,7 +14,7 @@
             name,
             finalGrade,
             units,
-            isCredited: true
+            isCredited,
         }
         dispatch('addClass', Class);
     };
@@ -32,6 +33,7 @@
         </select>
       </label>
     <button>Add</button>
+    <input type="checkbox" class="check" bind:checked={isCredited}> 
 </form>
 
 <style>
@@ -40,5 +42,11 @@
     }
     .units {
         width: 90px;
+    }
+    .check {
+        width: 15px;
+        height: 15px;
+        accent-color: #ac4949;
+        float: right;
     }
 </style>
