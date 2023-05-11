@@ -25,7 +25,6 @@
     border-radius: 40px;
     margin: 10% auto;
     width: max-content;
-    max-width: 300px;
     text-align: left;
     background: white;
     z-index: 5;

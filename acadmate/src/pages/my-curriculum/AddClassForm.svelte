@@ -13,7 +13,7 @@
             name,
             finalGrade,
             units,
-            assessmentList: [],
+            isCredited: true
         }
         dispatch('addClass', Class);
     };
@@ -21,8 +21,8 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <h3 style="color: #ac4949">New Class</h3>
-    <input type="text" placeholder="Class" bind:value={name}>
-    <input type="text" class="block" placeholder="Units" bind:value={units}>
+    <input type="text" class="class" placeholder="Class" bind:value={name}>
+    <input type="text" class="units" placeholder="Units" bind:value={units}>
     <label>
         Final Grade:
         <select bind:value={finalGrade}>
@@ -35,7 +35,10 @@
 </form>
 
 <style>
-    .block {
-        width: 115px;
+    .class {
+        width: 120px;
+    }
+    .units {
+        width: 90px;
     }
 </style>

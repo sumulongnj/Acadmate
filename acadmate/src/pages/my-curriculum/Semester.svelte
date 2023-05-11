@@ -64,9 +64,10 @@
             SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
             let totalGWA = 0;
             for (let i = 0; i < ClassList.length; i++){
-                totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+                if (ClassList[i]["isCredited"]) {
+                    totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+                }
             }
-            console.log(totalGWA);
             SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showDelete = false;
@@ -89,7 +90,8 @@
                     ...ClassList[index], 
                     name: updatedClass.name,
                     units: updatedClass.units,
-                    finalGrade: updatedClass.finalGrade
+                    finalGrade: updatedClass.finalGrade,
+                    isCredited: updatedClass.isCredited,
                 };
                 SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
                 localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
@@ -134,8 +136,10 @@
         let totalGWA = 0;
         let totalUnits = 0;
         for (let i = 0; i < ClassList.length; i++){
-            totalUnits += parseFloat(ClassList[i]["units"]);
-            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+            if (ClassList[i]["isCredited"]) {
+                totalUnits += parseFloat(ClassList[i]["units"]);
+                totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+            }
         }
         // console.log(totalGWA);
         let GWA = totalGWA / totalUnits;
@@ -159,7 +163,8 @@
             </button>
         </div>
         <h2>{semYear}, {semName}</h2>
-        <h3> GWA: {semGWA} Total Units: {semUnits}</h3>
+        <div class="block"> Semestral GWA <br> <h3> {semGWA} </h3>
+        Total Units <br> <h3> {semUnits} </h3> </div>
     </div>
     <div class="ClassList">
         <ul>
@@ -251,5 +256,10 @@
     .ClassList button {
         position: relative;
         right: 85px;
+    }
+    .block {
+        column-count: 2;
+        column-gap: 2em;
+        line-height:2px;
     }
 </style>

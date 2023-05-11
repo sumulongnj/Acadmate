@@ -108,8 +108,8 @@
         let totalOverallUnits = 0;
         let totalGWA = 0;
         for (let i = 0; i < SemesterList.length; i++){
-            totalOverallUnits += parseInt(SemesterList[i]["units"]);
-            totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseInt(SemesterList[i]["units"]));
+            totalOverallUnits += parseFloat(SemesterList[i]["units"]);
+            totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseFloat(SemesterList[i]["units"]));
         }
         // console.log("OverallGwa", totalGWA / totalOverallUnits);
         // console.log("Units", totalOverallUnits);
@@ -137,7 +137,7 @@
     computeGWA();
     // location.reload();
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
-    let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"));
+    let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
     // overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     if (isNaN(overallGWA)){
         // console.log(true);
@@ -148,7 +148,7 @@
     // console.log("OverallGwalol", overallGWA);
 
     let computeMaxGWA = () => {
-        let totalOverallUnits = parseInt(localStorage.getItem("TotalOverallUnits"));
+        let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
         let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
         let remainingOverallUnits = 148 - totalOverallUnits;
         let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
@@ -181,7 +181,8 @@
     <!-- {#if showCurriculum} -->
     <div class="Title">
         <h2>My Curriculum</h2>
-        <h3>GWA: {overallGWA} Total Units: {totalOverallUnits}</h3>
+        <div class="block"> Overall GWA <br> <h3> {overallGWA} </h3>
+            Total Units <br> <h3> {totalOverallUnits} </h3> </div>
     </div>
     
     <div class="AddButton">
@@ -296,5 +297,10 @@
     .SemesterList button {
         position: relative;
         right: 85px;
+    }
+    .block {
+        column-count: 2;
+        column-gap: 2em;
+        line-height:2px;
     }
 </style>
