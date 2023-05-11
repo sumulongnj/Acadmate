@@ -194,19 +194,21 @@
         <ul>
             {#each SemesterList as semester}
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <a href = "#/my-curriculum/semester" class = "SemesterLink">
-                    <div class="SemesterItems" on:click={(e) => {gotoSemester(e, semester.id)}}>
-                        <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                        <h3><br/><br/><br/><br/>
-                        </h3>
-                    </div>
-                </a>
-            <button on:click={() => {toggleEdit(); semEditID = semester.id; index = SemesterList.findIndex(semester => semester.id === semEditID)}}>
-                <img src="./images/edit.png" alt="edit">
-            </button>
-            <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
-                <img src="./images/trash.png" alt="delete">
-            </button>
+                <div class="SemesterContainer">
+                    <a href = "#/my-curriculum/semester" class="SemesterLink">
+                        <div class="SemesterItems" on:click={(e) => {gotoSemester(e, semester.id)}}>
+                            <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
+                            <h3><br/><br/><br/><br/>
+                            </h3>
+                        </div>
+                    </a>
+                    <button on:click={() => {toggleEdit(); semEditID = semester.id; index = SemesterList.findIndex(semester => semester.id === semEditID)}}>
+                        <img src="./images/edit.png" alt="edit">
+                    </button>
+                    <button id="deleteBtn" on:click={() => { toggleConfirm(); semDelID = semester.id}}>
+                        <img src="./images/trash.png" alt="delete">
+                    </button>
+                </div>
             {/each}
         </ul>
     </div>
@@ -227,15 +229,6 @@
 <!-- <Semester {showSemester} semYear={currentSemYear} semName={currentSemName}></Semester> -->
 
 <style>
-    /* #testButton{
-        margin-inline: 10px;
-        margin-bottom: 20px;
-        position: absolute;
-        height: 170px;
-        width: 380px;
-		border-radius: 20px;
-    }
-    */
     .AddButton{
         position: absolute;
         margin-left: 460px;
@@ -254,10 +247,6 @@
         color: #ffe5e5;
         cursor: pointer;
     }
-
-    /* .deleteButton (
-        pointer-events: none;
-    ) */
 
     .SemesterList {
         display: flex;
@@ -289,7 +278,7 @@
         margin-bottom: 20px;
         display: inline-flex;
         height: 170px;
-        width: 340px;
+        width: 280px;
         background-color: #e28f60;
 		border-radius: 20px;
         z-index: 0;
@@ -302,5 +291,9 @@
         column-count: 2;
         column-gap: 2em;
         line-height:2px;
+    }
+    .SemesterContainer {
+        width: 350px;
+        display: inline-flex;
     }
 </style>
