@@ -113,8 +113,8 @@
         let units = row.insertCell(2);
         let grade = row.insertCell(3);
         let targetGrade = row.insertCell(4);
-        units.innerHTML = semester.units.toFixed(2);
-        grade.innerHTML = semester.gwa.toFixed(2);
+        units.innerHTML = parseFloat(semester.units).toFixed(1);
+        grade.innerHTML = semester.gwa.toFixed(4);
     }
 
     window.onload = function() {
