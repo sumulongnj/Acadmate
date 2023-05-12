@@ -79,7 +79,7 @@
         SemesterList = SemesterList.filter(semester => semester.id != id);
         showConfirm = false;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
-        computeGWA();
+        computeOverallGWA();
         location.reload();
     };
 
@@ -103,8 +103,33 @@
         let classKey = JSON.parse(localStorage.getItem("ClassID"));
         // console.log(classKey);
     }
+    let computeMaxGWA = () => {
+        let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
+        let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+        let remainingOverallUnits = 148 - totalOverallUnits;
+        let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
 
-    let computeGWA = () => {
+        let latinStatus = "-";
+        let scholarStatus = "-";
+        if (1.20 >= maxGWA && maxGWA >= 1.00) {
+            latinStatus = "Summa Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
+            latinStatus = "Magna Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
+            latinStatus = "Cum Laude";
+            scholarStatus = "College Scholar";
+        }
+
+        localStorage.setItem("MaxGWA", JSON.stringify(maxGWA));
+        localStorage.setItem("MaxLatinStatus", JSON.stringify(latinStatus));
+        localStorage.setItem("MaxScholarStatus", JSON.stringify(scholarStatus));
+    }
+
+    let computeOverallGWA = () => {
         let totalOverallUnits = 0;
         let totalGWA = 0;
         for (let i = 0; i < SemesterList.length; i++){
@@ -132,9 +157,10 @@
         localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
         localStorage.setItem("CurrLatinStatus", JSON.stringify(latinStatus));
         localStorage.setItem("CurrScholarStatus", JSON.stringify(scholarStatus));
+        computeMaxGWA();
     }
 
-    computeGWA();
+    computeOverallGWA();
     // location.reload();
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
     let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
@@ -147,33 +173,9 @@
     }
     // console.log("OverallGwalol", overallGWA);
 
-    let computeMaxGWA = () => {
-        let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
-        let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
-        let remainingOverallUnits = 148 - totalOverallUnits;
-        let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
-
-        let latinStatus = "-";
-        let scholarStatus = "-";
-        if (1.20 >= maxGWA && maxGWA >= 1.00) {
-            latinStatus = "Summa Cum Laude";
-            scholarStatus = "University Scholar";
-        }
-        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
-            latinStatus = "Magna Cum Laude";
-            scholarStatus = "University Scholar";
-        }
-        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
-            latinStatus = "Cum Laude";
-            scholarStatus = "College Scholar";
-        }
-
-        localStorage.setItem("MaxGWA", JSON.stringify(maxGWA));
-        localStorage.setItem("MaxLatinStatus", JSON.stringify(latinStatus));
-        localStorage.setItem("MaxScholarStatus", JSON.stringify(scholarStatus));
-    }
     
-    computeMaxGWA();
+    
+    
 
 </script>
 

@@ -5,6 +5,7 @@
     import EditClassForm from './EditClassForm.svelte';
     import { classIdAllocator } from '../../classStores.js';
     import { params } from 'svelte-spa-router';
+    // import {computeOverallGWA} from '../MyCurriculum.svelte';
 
     let showDelete = false;
     let showConfirm = false;
@@ -60,16 +61,22 @@
             classKey = JSON.parse(localStorage.getItem("ClassID")); 
             ClassList = [...ClassList, newClass];
             SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
-            if (SemesterList[CurrentSemesterIndex]["isCredited"] === true) {
-                SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
-            }
-            let totalGWA = 0;
-            for (let i = 0; i < ClassList.length; i++){
-                if (ClassList[i]["isCredited"]) {
-                    totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
-                }
-            }
-            SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
+            // if (SemesterList[CurrentSemesterIndex]["isCredited"] === true) {
+            //     SemesterList[CurrentSemesterIndex]["units"] = parseFloat(SemesterList[CurrentSemesterIndex]["units"]) + parseFloat(newClass.units);
+            // }
+            // let totalGWA = 0;
+            // for (let i = 0; i < ClassList.length; i++){
+            //     if (ClassList[i]["isCredited"]) {
+            //         if (ClassList[i]["finalGrade"] == 'DRP'){
+            //             continue;
+            //         }
+            //         if (ClassList[i]["finalGrade"] == 'INC'){
+            //             continue;
+            //         }
+            //         totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+            //     }
+            // }
+            // SemesterList[CurrentSemesterIndex]["gwa"] = totalGWA / SemesterList[CurrentSemesterIndex]["units"];
             localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
             showDelete = false;
             computeGWA();
@@ -109,23 +116,80 @@
         ClassList = ClassList.filter(Class => Class.id != id);
         showConfirm = false;
         SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
-        let totalGWA = 0;
-        let totalUnits = 0;
-        for (let i = 0; i < ClassList.length; i++){
-            totalUnits += parseFloat(ClassList[i]["units"]);
-            totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
-        }
-        // console.log(totalGWA);
-        let GWA = totalGWA / totalUnits;
-        if (isNaN(GWA)){
-            GWA = (0.0).toFixed(4);
-        }
-        SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
-        SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
+        // let totalGWA = 0;
+        // let totalUnits = 0;
+        // for (let i = 0; i < ClassList.length; i++){
+        //     totalUnits += parseFloat(ClassList[i]["units"]);
+        //     totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+        // }
+        // // console.log(totalGWA);
+        // let GWA = totalGWA / totalUnits;
+        // if (isNaN(GWA)){
+        //     GWA = (0.0).toFixed(4);
+        // }
+        // SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
+        // SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
-        location.reload();
+        // location.reload();
+        computeGWA();
 
     };
+    let computeMaxGWA = () => {
+        let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
+        let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+        let remainingOverallUnits = 148 - totalOverallUnits;
+        let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
+
+        let latinStatus = "-";
+        let scholarStatus = "-";
+        if (1.20 >= maxGWA && maxGWA >= 1.00) {
+            latinStatus = "Summa Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
+            latinStatus = "Magna Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
+            latinStatus = "Cum Laude";
+            scholarStatus = "College Scholar";
+        }
+
+        localStorage.setItem("MaxGWA", JSON.stringify(maxGWA));
+        localStorage.setItem("MaxLatinStatus", JSON.stringify(latinStatus));
+        localStorage.setItem("MaxScholarStatus", JSON.stringify(scholarStatus));
+    }
+
+    let computeOverallGWA = () => {
+        let totalOverallUnits = 0;
+        let totalGWA = 0;
+        for (let i = 0; i < SemesterList.length; i++){
+            totalOverallUnits += parseFloat(SemesterList[i]["units"]);
+            totalGWA += (parseFloat(SemesterList[i]["gwa"]) * parseFloat(SemesterList[i]["units"]));
+        }
+        // console.log("OverallGwa", totalGWA / totalOverallUnits);
+        // console.log("Units", totalOverallUnits);
+        let OverallGWA = totalGWA / totalOverallUnits;
+        let latinStatus = "-";
+        let scholarStatus = "-";
+        if (1.20 >= OverallGWA && OverallGWA >= 1.00) {
+            latinStatus = "Summa Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.45 >= OverallGWA && OverallGWA >= 1.21) {
+            latinStatus = "Magna Cum Laude";
+            scholarStatus = "University Scholar";
+        }
+        else if (1.75 >= OverallGWA && OverallGWA >= 1.46) {
+            latinStatus = "Cum Laude";
+            scholarStatus = "College Scholar";
+        }
+        localStorage.setItem("OverallGWA", JSON.stringify(OverallGWA));
+        localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
+        localStorage.setItem("CurrLatinStatus", JSON.stringify(latinStatus));
+        localStorage.setItem("CurrScholarStatus", JSON.stringify(scholarStatus));
+        computeMaxGWA();
+    }
 
     const computeGWA = () => {
         SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
@@ -138,18 +202,25 @@
         let totalUnits = 0;
         for (let i = 0; i < ClassList.length; i++){
             if (ClassList[i]["isCredited"]) {
+                if (ClassList[i]["finalGrade"] == 'DRP' || ClassList[i]["finalGrade"] == '4.00'){
+                    continue;
+                }
+                if (ClassList[i]["finalGrade"] == 'INC' || ClassList[i]["finalGrade"] == '0.00'){
+                    continue;
+                }
                 totalUnits += parseFloat(ClassList[i]["units"]);
                 totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
             }
         }
-        // console.log(totalGWA);
+        console.log(totalGWA);
         let GWA = totalGWA / totalUnits;
         if (isNaN(GWA)){
             GWA = (0.0).toFixed(4);
         }
         SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
-        SemesterList[CurrentSemesterIndex]["units"] = totalUnits;
+        SemesterList[CurrentSemesterIndex]["units"] = totalUnits.toFixed(1);
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+        computeOverallGWA();
         location.reload();
     }
     
@@ -173,7 +244,7 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="ClassContainer">
                     <div class="ClassItems">
-                        <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {parseFloat(Class.finalGrade).toFixed(2)}</h3>
+                        <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {Class.finalGrade}</h3>
                         <h3><br/><br/><br/><br/>
                         </h3>
                     </div>
