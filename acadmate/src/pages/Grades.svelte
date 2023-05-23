@@ -150,7 +150,7 @@
             </ul>
             <span class="clear"></span>
         </div>
-        <div style="margin-top:-1em">
+        <div style="margin-top:-1cem">
             <p>Can still attain</p>
             <ul id="canStillAttain">
                 <li class="latin">{maxLatinStatus}</li>

@@ -277,7 +277,7 @@
     }
     .SemesterItems {
         margin-inline: 10px;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
         display: flex;
         align-items: flex-end;
         height: 170px;

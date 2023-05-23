@@ -7,8 +7,15 @@
 
 <main>
     <div class="dashboard">
+        <div class="Title">
+            <h2>Welcome, User!</h2>
+        </div>
         <div class="tile">
-            <div class="chart-container">
+            <div class="gwa-container">
+                Sample tile.
+            </div>
+        </div>
+        <div class="tile">
                 <div class="chart">
                     <Pie size={200} percent={percent} />
                 </div>
@@ -21,7 +28,6 @@
                         <div class="legend-square" style="background-color: #e28f60;"></div>
                         <span>Remaining Units - {148 - totalOverallUnits}</span>
                     </div>
-                </div>
             </div>
             <div class="text">
                 You are <b>{percent.toFixed(2)}%</b> complete!
@@ -35,7 +41,7 @@
         display: flex;
         align-items: left;
         padding-left: 300px;
-        padding-top: 100px;
+        padding-top: 130px;
     }
 
     .tile {
@@ -46,13 +52,18 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin-right: 2em;
     }
 
-    .chart-container {
+    .gwa-container {
+        width: 800px;
+    }
+
+    /* .chart-container {
         display: flex;
         align-items: center;
         margin-bottom: 20px;
-    }
+    } */
 
     .chart {
         margin-right: 20px;

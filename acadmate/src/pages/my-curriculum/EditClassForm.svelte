@@ -36,7 +36,7 @@
       </select>
     </label>    
     <button>Edit</button>
-    <input type="checkbox" class="check" bind:checked={isCredited}> 
+    <input type="checkbox" class="check" bind:checked={isCredited}> <span class="credit"> Credit </span> 
 </form>
 
 <style>
@@ -47,9 +47,18 @@
         width: 90px;
     }
     .check {
-        width: 15px;
-        height: 15px;
+        width: 18px;
+        height: 18px;
         accent-color: #ac4949;
+        margin-top: 5px;
         float: right;
+    }
+    .credit {
+      float: right;
+      padding-top: 6px;
+      padding-right: 0.5em;
+      font-size: 12px;
+      font-weight: 600;
+      color:#ac4949;
     }
 </style>
