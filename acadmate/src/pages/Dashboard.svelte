@@ -2,7 +2,8 @@
     import Pie from './Pie.svelte';
 
     let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
-    let percent = (totalOverallUnits / 148) * 100;
+    let percent = Math.min((totalOverallUnits / 148) * 100, 100); // min to cap percent to 100
+    
 </script>
 
 <main>
@@ -21,11 +22,11 @@
                 </div>
                 <div class="legend">
                     <div class="legend-item">
-                        <div class="legend-square" style="background-color: #ac4949;"></div>
+                        <div class="legend-square" style="background-color: #e28f60;"></div>
                         <span>Completed Units - {totalOverallUnits}</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-square" style="background-color: #e28f60;"></div>
+                        <div class="legend-square" style="background-color: #ccc;"></div>
                         <span>Remaining Units - {148 - totalOverallUnits}</span>
                     </div>
             </div>
