@@ -199,10 +199,11 @@
                 <div class="SemesterContainer">
                     <a href = "#/my-curriculum/semester" class="SemesterLink">
                         <div class="SemesterItems" on:click={(e) => {gotoSemester(e, semester.id)}}>
-                            <h3><br/><br/><br/><br/>{semester.year}<br/>{semester.name}</h3>
-                            <h3><br/><br/><br/><br/>
-                            </h3>
-                        </div>
+                            <h3>
+                                <span class="heading">{semester.year}</span>
+                                <span class="subheading"><br/>{semester.name}</span>
+                              </h3>
+                          </div>
                     </a>
                     <button on:click={() => {toggleEdit(); semEditID = semester.id; index = SemesterList.findIndex(semester => semester.id === semEditID)}}>
                         <img src="./images/edit.png" alt="edit">
@@ -249,18 +250,17 @@
         color: #ffe5e5;
         cursor: pointer;
     }
-
     .SemesterList {
         display: flex;
         flex-direction: row;
         position: absolute;
         margin-left: 225px;
-        margin-top: 160px;
+        margin-top: 170px;
     }
     .SemesterList h3 {
         color: #ffffff;
-        font-weight: bold;
-        margin: 20px;
+        margin-left: 24px;
+        font-weight: 500;
     }
     .SemesterList button, img {
         width: 25px;
@@ -277,17 +277,19 @@
     }
     .SemesterItems {
         margin-inline: 10px;
-        margin-bottom: 20px;
-        display: inline-flex;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: flex-end;
         height: 170px;
-        width: 280px;
+        width: 330px;
         background-color: #e28f60;
 		border-radius: 20px;
         z-index: 0;
     }
     .SemesterList button {
         position: relative;
-        right: 85px;
+        right: 80px;
+        top: 5px;
     }
     .block {
         column-count: 2;
@@ -295,7 +297,16 @@
         line-height:2px;
     }
     .SemesterContainer {
-        width: 350px;
+        width: 400px;
         display: inline-flex;
+    }
+    a {
+        text-decoration: none;
+    }
+    .heading {
+        font-size: 22px;
+    }
+    .subheading {
+        font-size: 17px;
     }
 </style>

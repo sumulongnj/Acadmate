@@ -244,8 +244,9 @@
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="ClassContainer">
                     <div class="ClassItems">
-                        <h3><br/><br/><br/><br/>{Class.name}<br/>Final Grade: {Class.finalGrade}</h3>
-                        <h3><br/><br/><br/><br/>
+                        <h3>
+                            <span class="heading">{Class.name}</span>
+                            <span class="subheading"><br/>Final Grade: {Class.finalGrade}</span>
                         </h3>
                     </div>
                     <button on:click={() => {toggleEdit(); classEditID = Class.id; index = ClassList.findIndex(sub => sub.id === classEditID)}}>
@@ -277,7 +278,7 @@
 <style>
     .AddButton{
         position: absolute;
-        margin-left: 260px;
+        margin-left: 250px;
         margin-top: 20px;
     }
     .AddButton button {
@@ -294,16 +295,15 @@
         cursor: pointer;
     }
     .ClassList {
-        display: flex;
         flex-direction: row;
         position: absolute;
         margin-left: 225px;
-        margin-top: 160px;
+        margin-top: 170px;
     }
     .ClassList h3 {
         color: #ffffff;
-        font-weight: bold;
-        margin: 20px;
+        margin-left: 24px;
+        font-weight: 500;
     }
     .ClassList button, img {
         width: 25px;
@@ -319,17 +319,19 @@
     }
     .ClassItems {
         margin-inline: 10px;
-        margin-bottom: 20px;
-        display: inline-flex;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: flex-end;
         height: 170px;
-        width: 340px;
+        width: 350px;
         background-color: #e28f60;
 		border-radius: 20px;
         z-index: 0;
     }
     .ClassList button {
         position: relative;
-        right: 85px;
+        right: 80px;
+        top: 5px;
     }
     .block {
         column-count: 2;
@@ -337,7 +339,13 @@
         line-height:2px;
     }
     .ClassContainer {
-        width: 350px;
+        width: 400px;
         display: inline-flex;
+    }
+    .heading {
+        font-size: 22px;
+    }
+    .subheading {
+        font-size: 17px;
     }
 </style>
