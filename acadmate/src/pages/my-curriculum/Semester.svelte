@@ -303,7 +303,7 @@
     .ClassList h3 {
         color: #ffffff;
         margin-left: 24px;
-        font-weight: 500;
+        font-weight: 600;
     }
     .ClassList button, img {
         width: 25px;
@@ -319,19 +319,67 @@
     }
     .ClassItems {
         margin-inline: 10px;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         display: flex;
         align-items: flex-end;
         height: 170px;
         width: 350px;
-        background-color: #e28f60;
 		border-radius: 20px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
         z-index: 0;
     }
     .ClassList button {
         position: relative;
         right: 80px;
         top: 5px;
+    }
+
+    .ClassContainer:nth-child(9n-8) .ClassItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .ClassContainer:nth-child(9n-7) .ClassItems {
+        background-color: white;
+    }
+
+    .ClassContainer:nth-child(9n-7) h3 {
+        color: #ac4949;
+    }
+
+    .ClassContainer:nth-child(9n-6) .ClassItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .ClassContainer:nth-child(9n-5) .ClassItems {
+        background-color: white;
+    }
+
+    .ClassContainer:nth-child(9n-5) h3 {
+        color: #ac4949;
+    }
+
+    .ClassContainer:nth-child(9n-4) .ClassItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .ClassContainer:nth-child(9n-3) .ClassItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .ClassContainer:nth-child(9n-2) .ClassItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .ClassContainer:nth-child(9n-1) .ClassItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .ClassContainer:nth-child(9n) .ClassItems {
+        background-color: white;
+    }
+
+    .ClassContainer:nth-child(9n) h3 {
+        color: #ac4949;
     }
     .block {
         column-count: 2;

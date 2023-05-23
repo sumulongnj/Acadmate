@@ -59,7 +59,6 @@
 			<img src="./images/logo_with_title.png" alt="logo" class="logo">
 		</a>
 		<a href="/" style="float: right">Settings</a>
-		<a href="/" style="float: right">Profile</a>
 	</div>
 	
 	<div class="sidenav">

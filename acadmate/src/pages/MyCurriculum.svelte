@@ -260,7 +260,7 @@
     .SemesterList h3 {
         color: #ffffff;
         margin-left: 24px;
-        font-weight: 500;
+        font-weight: 600;
     }
     .SemesterList button, img {
         width: 25px;
@@ -277,13 +277,13 @@
     }
     .SemesterItems {
         margin-inline: 10px;
-        margin-bottom: 25px;
+        margin-bottom: 30px;
         display: flex;
         align-items: flex-end;
         height: 170px;
         width: 330px;
-        background-color: #e28f60;
 		border-radius: 20px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
         z-index: 0;
     }
     .SemesterList button {
@@ -291,6 +291,54 @@
         right: 80px;
         top: 5px;
     }
+    .SemesterContainer:nth-child(9n-8) .SemesterItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .SemesterContainer:nth-child(9n-7) .SemesterItems {
+        background-color: white;
+    }
+
+    .SemesterContainer:nth-child(9n-7) h3 {
+        color: #ac4949;
+    }
+
+    .SemesterContainer:nth-child(9n-6) .SemesterItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .SemesterContainer:nth-child(9n-5) .SemesterItems {
+        background-color: white;
+    }
+
+    .SemesterContainer:nth-child(9n-5) h3 {
+        color: #ac4949;
+    }
+
+    .SemesterContainer:nth-child(9n-4) .SemesterItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .SemesterContainer:nth-child(9n-3) .SemesterItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .SemesterContainer:nth-child(9n-2) .SemesterItems {
+        background-color: #ac4949; /* RED */
+    }
+
+    .SemesterContainer:nth-child(9n-1) .SemesterItems {
+        background-color: #e28f60; /* ORANGE */
+    }
+
+    .SemesterContainer:nth-child(9n) .SemesterItems {
+        background-color: white;
+    }
+
+    .SemesterContainer:nth-child(9n) h3 {
+        color: #ac4949;
+    }
+
     .block {
         column-count: 2;
         column-gap: 2em;
