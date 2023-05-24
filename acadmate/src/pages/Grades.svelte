@@ -27,7 +27,7 @@
     if (localStorage.getItem("CurrScholarStatus") == null) {
         localStorage.setItem("CurrScholarStatus", "-");
     }
-    let currScholarStatus = JSON.parse(localStorage.getItem("CurrScholarStatus"));
+    let currScholarStatus = "-";
 
     // MaxLatinStatus
     if (localStorage.getItem("MaxLatinStatus") == null) {
@@ -36,10 +36,7 @@
     let maxLatinStatus = JSON.parse(localStorage.getItem("MaxLatinStatus"));
 
     // MaxScholarStatus
-    if (localStorage.getItem("MaxScholarStatus") == null) {
-        localStorage.setItem("MaxScholarStatus", "-");
-    }
-    let maxScholarStatus = JSON.parse(localStorage.getItem("MaxScholarStatus"));
+    let maxScholarStatus = "-";
 
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
     console.log(SemesterList[0])
@@ -84,6 +81,30 @@
         let result = SemesterList.filter(function(semester) {
             return semester.name === searchSemester && semester.year === searchYear;
         });
+        let semGWA = result[0].gwa;
+        let semUnits = result[0].units;
+        let remainingSemUnits = 21 - semUnits;
+        let maxSemGWA = ((semUnits * semGWA) + (remainingSemUnits * 1.00))/21;
+        // semGWA
+        if (semGWA <= 1.45) {
+            currScholarStatus = "University Scholar";
+        }
+        else if (semGWA <= 1.75) {
+            currScholarStatus = "College Scholar";
+        }
+        else {
+            currScholarStatus = "-";
+        }
+        // maxSemGWA
+        if (maxSemGWA <= 1.45) {
+            maxScholarStatus = "University Scholar";
+        }
+        else if (maxSemGWA <= 1.75) {
+            maxScholarStatus = "College Scholar";
+        }
+        else {
+            maxScholarStatus = "-";
+        }
         updateTable(result[0]);
     }
     function updateTable(semester) {
@@ -139,14 +160,12 @@
             <p class="numberGWA" id="maxGWA">{maxGWA}</p>
         </div>
     </div>
-    <!-- Need to link Academic Statuses later on -->
-    <div class="academicStatus">
-        <h3>Academic Status</h3>
+    <div class="academicStatus latinStatus">
+        <h3>Latin Honors Status</h3>
         <div>
             <p>On track for</p>
             <ul id="onTrackFor">
                 <li class="latin">{currLatinStatus}</li>
-                <li class="scholar">{currScholarStatus}</li>
             </ul>
             <span class="clear"></span>
         </div>
@@ -154,11 +173,26 @@
             <p>Can still attain</p>
             <ul id="canStillAttain">
                 <li class="latin">{maxLatinStatus}</li>
+            </ul>
+            <span class="clear"></span>
+        </div>
+    </div>
+    <div class="academicStatus scholarStatus">
+        <h3>Scholar Status for Selected Semester</h3>
+        <div>
+            <p>On track for</p>
+            <ul id="onTrackFor">
+                <li class="scholar">{currScholarStatus}</li>
+            </ul>
+            <span class="clear"></span>
+        </div>
+        <div style="margin-top:-1cem">
+            <p>Can still attain</p>
+            <ul id="canStillAttain">
                 <li class="scholar">{maxScholarStatus}</li>
             </ul>
             <span class="clear"></span>
         </div>
-        
     </div>
     <div class="semestralGrades">
         <h3>Semestral Grades</h3>

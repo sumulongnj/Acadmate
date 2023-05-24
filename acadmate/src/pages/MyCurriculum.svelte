@@ -110,23 +110,18 @@
         let maxGWA = ((totalOverallUnits * overallGWA) + (remainingOverallUnits * 1.00))/148;
 
         let latinStatus = "-";
-        let scholarStatus = "-";
-        if (1.20 >= maxGWA && maxGWA >= 1.00) {
+        if (1.20 >= maxGWA) {
             latinStatus = "Summa Cum Laude";
-            scholarStatus = "University Scholar";
         }
-        else if (1.45 >= maxGWA && maxGWA >= 1.21) {
+        else if (1.45 >= maxGWA) {
             latinStatus = "Magna Cum Laude";
-            scholarStatus = "University Scholar";
         }
-        else if (1.75 >= maxGWA && maxGWA >= 1.46) {
+        else if (1.75 >= maxGWA) {
             latinStatus = "Cum Laude";
-            scholarStatus = "College Scholar";
         }
 
         localStorage.setItem("MaxGWA", JSON.stringify(maxGWA));
         localStorage.setItem("MaxLatinStatus", JSON.stringify(latinStatus));
-        localStorage.setItem("MaxScholarStatus", JSON.stringify(scholarStatus));
     }
 
     let computeOverallGWA = () => {
@@ -140,23 +135,18 @@
         // console.log("Units", totalOverallUnits);
         let OverallGWA = totalGWA / totalOverallUnits;
         let latinStatus = "-";
-        let scholarStatus = "-";
-        if (1.20 >= OverallGWA && OverallGWA >= 1.00) {
+        if (1.20 >= OverallGWA) {
             latinStatus = "Summa Cum Laude";
-            scholarStatus = "University Scholar";
         }
-        else if (1.45 >= OverallGWA && OverallGWA >= 1.21) {
+        else if (1.45 >= OverallGWA) {
             latinStatus = "Magna Cum Laude";
-            scholarStatus = "University Scholar";
         }
-        else if (1.75 >= OverallGWA && OverallGWA >= 1.46) {
+        else if (1.75 >= OverallGWA) {
             latinStatus = "Cum Laude";
-            scholarStatus = "College Scholar";
         }
         localStorage.setItem("OverallGWA", JSON.stringify(OverallGWA));
         localStorage.setItem("TotalOverallUnits", JSON.stringify(totalOverallUnits));
         localStorage.setItem("CurrLatinStatus", JSON.stringify(latinStatus));
-        localStorage.setItem("CurrScholarStatus", JSON.stringify(scholarStatus));
         computeMaxGWA();
     }
 

@@ -172,15 +172,20 @@ button:focus {
 .academicStatus {
 	position: absolute;
 	height: 230px;
-	width: 770px;
+	width: 400px;
 	overflow: auto;
 	top: 130px;
-	left: 600px;
 	background-color: #ffffff;
 	text-decoration: none;
 	border-radius: 20px;
 	margin: 10px;
 	box-shadow: 0px 4px 7px lightgray;
+}
+.latinStatus {
+	left: 600px;
+}	
+.scholarStatus {
+	left: 1040px;
 }
 .academicStatus h3 {
 	font-weight: bold;
