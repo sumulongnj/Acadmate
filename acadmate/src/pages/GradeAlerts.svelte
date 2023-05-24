@@ -20,9 +20,23 @@
     {#each SemesterList as semester}
         <div class="alert">
             {#if semester["underload"]}
-                <p>Warning: {semester["year"]} {semester["name"]} is underloaded!</p>
+                <p style="display: inline-block; margin-left: 30px;">
+                    <span class="bellSpan">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                    </span>
+                </p>
+                <p>{semester["year"]} {semester["name"]} is underloaded!</p>
             {:else if semester["overload"]}
-                <p>Warning: {semester["year"]} {semester["name"]} is overloaded!</p>
+                <p style="display: inline-block; margin-left: 30px;">
+                    <span class="bellSpan">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                    </span>
+                </p>
+                <p>{semester["year"]} {semester["name"]} is overloaded!</p>
             {/if}
         </div>
     {/each}
@@ -44,16 +58,31 @@
     }
 
     .alert {
-        display: block;
+        display: flex;
+        align-items: center;
         background-color: white;
 		text-decoration: none;
 		border-radius: 20px;
         box-shadow: 0px 4px 7px lightgray;
         width: calc(100vw - 400px);
+        margin: 15px 0px;
     }
     .alert p {
-        margin: 10px 10px;
-        padding: 20px 5px;
+        display: inline-block;
+        margin: 10px 0px;
+        padding: 10px 5px;
+        font-weight: 500;
+    }
+
+    .bellSpan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #e48c64;
+        margin-right: 8px;
     }
 
 </style>
