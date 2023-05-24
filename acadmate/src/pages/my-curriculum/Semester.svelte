@@ -200,16 +200,21 @@
         SemesterList[CurrentSemesterIndex]["classList"] = ClassList;
         let totalGWA = 0;
         let totalUnits = 0;
+        let uncreditedUnits = 0;
         for (let i = 0; i < ClassList.length; i++){
             if (ClassList[i]["isCredited"]) {
                 if (ClassList[i]["finalGrade"] == 'DRP' || ClassList[i]["finalGrade"] == '4.00'){
+                    // uncreditedUnits += parseFloat(ClassList[i]["units"]);
                     continue;
                 }
                 if (ClassList[i]["finalGrade"] == 'INC' || ClassList[i]["finalGrade"] == '0.00'){
+                    
                     continue;
                 }
                 totalUnits += parseFloat(ClassList[i]["units"]);
                 totalGWA += (parseFloat(ClassList[i]["finalGrade"]) * parseFloat(ClassList[i]["units"]));
+            } else {
+                uncreditedUnits += parseFloat(ClassList[i]["units"]);
             }
         }
         console.log(totalGWA);
@@ -219,6 +224,26 @@
         }
         SemesterList[CurrentSemesterIndex]["gwa"] = GWA;
         SemesterList[CurrentSemesterIndex]["units"] = totalUnits.toFixed(1);
+        let loadUnits = totalUnits + uncreditedUnits;
+        console.log(uncreditedUnits);
+        if (!(SemesterList[CurrentSemesterIndex]["name"] == "Midyear")) {
+            if (loadUnits >= 15){
+                SemesterList[CurrentSemesterIndex]["underload"] = false;
+            } else {
+                SemesterList[CurrentSemesterIndex]["underload"] = true;
+            }
+            if (loadUnits > 21){
+                SemesterList[CurrentSemesterIndex]["overload"] = true;
+            } else {
+                SemesterList[CurrentSemesterIndex]["overload"] = false;
+            }
+        } else {
+            if (loadUnits > 6){
+                SemesterList[CurrentSemesterIndex]["overload"] = true;
+            } else {
+                SemesterList[CurrentSemesterIndex]["overload"] = false;
+            }
+        }
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
         computeOverallGWA();
         location.reload();
