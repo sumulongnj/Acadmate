@@ -18,12 +18,13 @@
         <h3>Underloading/Overloading</h3>
     </div>
     {#each SemesterList as semester}
-        {#if semester["underload"]}
-            <h3>Warning: {semester["year"]} {semester["name"]} is underloaded!<br></h3>
-        {:else if semester["overload"]}
-            <h3>Warning: {semester["year"]} {semester["name"]} is overloaded!<br></h3>
-        {/if}
-       
+        <div class="alert">
+            {#if semester["underload"]}
+                <p>Warning: {semester["year"]} {semester["name"]} is underloaded!</p>
+            {:else if semester["overload"]}
+                <p>Warning: {semester["year"]} {semester["name"]} is overloaded!</p>
+            {/if}
+        </div>
     {/each}
     </div>
 </main>
@@ -38,6 +39,21 @@
     .alertTitle h3 {
         margin: 5px 18px;
         font-weight: normal;
+        font-size: 15px;
         color: #b25656;
     }
+
+    .alert {
+        display: block;
+        background-color: white;
+		text-decoration: none;
+		border-radius: 20px;
+        box-shadow: 0px 4px 7px lightgray;
+        width: calc(100vw - 400px);
+    }
+    .alert p {
+        margin: 10px 10px;
+        padding: 20px 5px;
+    }
+
 </style>
