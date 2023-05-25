@@ -163,10 +163,6 @@
     }
     // console.log("OverallGwalol", overallGWA);
 
-    
-    
-    
-
 </script>
 
 <main>

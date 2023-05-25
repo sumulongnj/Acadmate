@@ -1,7 +1,6 @@
 <script>
 	// import { page } from "$app/stores";
-
-
+	import Popup from './pages/popup.svelte';
     import Router, {location, link} from 'svelte-spa-router';
 	import Dashboard from './pages/Dashboard.svelte';
 	import MyCurriculum from './pages/MyCurriculum.svelte'; 
@@ -9,6 +8,7 @@
 	import GradeAlerts from './pages/GradeAlerts.svelte';
 	import Requirements from './pages/Requirements.svelte'; 
     import Semester from './pages/my-curriculum/Semester.svelte';
+	import InstructionsForm from './pages/InstructionsForm.svelte';
 
     const routes = {
 		'/': Dashboard,
@@ -51,6 +51,15 @@
 			id: "/requirements"
 		}
 	];
+
+	let showInstructions = false;
+	let toggleInstructions = () => {
+        showInstructions = !showInstructions;
+    };
+	const exitInstructions = (e) => {
+        showInstructions = false;
+        //location.reload();
+    };
 </script>
 <main>
 	<div class="topnav">
@@ -58,7 +67,11 @@
 		<a href="/">
 			<img src="./images/logo_with_title.png" alt="logo" class="logo">
 		</a>
-		<a href="/" style="float: right">Settings</a>
+		<div style="float: right;">
+			<button on:click={toggleInstructions}>
+				<strong>Instructions</strong>
+			</button>
+		</div>
 	</div>
 	
 	<div class="sidenav">
@@ -78,6 +91,10 @@
 	<slot></slot>
     <Router {routes} />
 </main>
+
+<Popup {showInstructions} on:click={toggleInstructions}>
+    <InstructionsForm on:exitInstructions={exitInstructions}/>
+</Popup>
 
 <style>
 	/* Top Nagivation Bar */
