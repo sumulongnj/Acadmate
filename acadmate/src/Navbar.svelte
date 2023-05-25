@@ -9,6 +9,7 @@
 	import GradeAlerts from './pages/GradeAlerts.svelte';
 	import Requirements from './pages/Requirements.svelte'; 
     import Semester from './pages/my-curriculum/Semester.svelte';
+	import HowToUse from './pages/HowToUse.svelte';
 
     const routes = {
 		'/': Dashboard,
@@ -16,7 +17,8 @@
 		'/grades': Grades,
 		'/grade-alerts': GradeAlerts,
 		'/requirements': Requirements,
-		'/my-curriculum/semester': Semester
+		'/my-curriculum/semester': Semester,
+		'/how-to-use': HowToUse
 	}
 
 	const links = [
@@ -58,7 +60,7 @@
 		<a href="/">
 			<img src="./images/logo_with_title.png" alt="logo" class="logo">
 		</a>
-		<a href="/" style="float: right">Settings</a>
+		<a href="#/how-to-use" style="float: right">How To Use</a>
 	</div>
 	
 	<div class="sidenav">
