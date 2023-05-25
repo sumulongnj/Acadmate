@@ -13,11 +13,13 @@
         <div class="Title">
             <h2>Welcome, User!</h2>
         </div>
-        <div class="tile">
+        <div class="tile red">
             <div class="gwa-container">
-                <img src="./images/StudyGirl.jpg" alt="Study Girl" class="studyGirl">
-                <h3 class="gwa-header">Current GWA: <span class="gwa-value">{overallGWA}</span></h3>
-                <h3 class="gwa-header">Max GWA: <span class="gwa-value">{maxGWA}</span></h3>
+                <img src="./images/dashstudy.png" alt="Dashboard Study" class="dashstudy">
+                <div class="gwa-col">
+                <h3 class="gwa-header">CURRENT GWA<br><span class="gwa-value">{overallGWA}</span></h3> 
+                <h3 class="gwa-header">MAXIMUM GWA<br><span class="gwa-value">{maxGWA}</span></h3>
+                </div>
             </div>
         </div>
         <div class="tile">
@@ -62,6 +64,8 @@
 
     .gwa-container {
         width: 800px;
+        display: flex;
+        align-items: right;
     }
 
     /* .chart-container {
@@ -98,12 +102,28 @@
         text-align: center;
     }
 
-    .studyGirl {
-        width: 500px;
-        margin-right: 30px;
-        float: left;
+    .dashstudy {
+        height: 320px;
+        width: 800px;
+        margin-bottom: -20px;
+        margin-left: -150px;
+        object-fit: cover;
+    }
+    .gwa-header {
+        font-size: 12px;
+    
     }
     .gwa-value {
         font-weight: 400;
+        font-size: 22px;
+    
+    }
+    .gwa-col {
+        display: flex;
+        flex-direction: column;
+    }
+    .red {
+        background-color: #ac4949;
+        color: white;
     }
 </style>

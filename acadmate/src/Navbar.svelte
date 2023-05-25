@@ -60,7 +60,7 @@
 		<a href="/">
 			<img src="./images/logo_with_title.png" alt="logo" class="logo">
 		</a>
-		<a href="#/how-to-use" style="float: right">How To Use</a>
+		<a href="#/how-to-use" style="float: right">Help</a>
 	</div>
 	
 	<div class="sidenav">
