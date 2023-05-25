@@ -3,8 +3,6 @@
 
     let totalOverallUnits = parseFloat(localStorage.getItem("TotalOverallUnits"));
     let percent = Math.min((totalOverallUnits / 148) * 100, 100); // min to cap percent to 100
-    let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
-    let maxGWA = parseFloat(localStorage.getItem("MaxGWA")).toFixed(4);
     
 </script>
 
@@ -15,8 +13,7 @@
         </div>
         <div class="tile">
             <div class="gwa-container">
-                <h3>Current GWA: {overallGWA}</h3>
-                <h3>Max GWA: {maxGWA}</h3>
+                Sample tile.
             </div>
         </div>
         <div class="tile">
