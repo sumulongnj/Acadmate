@@ -1,14 +1,14 @@
 <script>
     let SemesterList = JSON.parse(localStorage.getItem("SemesterList"));
-    for (let i = 0; i < SemesterList.length; i++) {
-    let element = SemesterList[i];
-    // Do something with each element
-    if (SemesterList[i]["name"] == "Midyear"){
-        SemesterList[i]["underload"] = false;
-    }
-    console.log(element);
-    }
-    localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
+    // for (let i = 0; i < SemesterList.length; i++) {
+    // let element = SemesterList[i];
+    // // Do something with each element
+    // if (SemesterList[i]["name"] == "Midyear"){
+    //     SemesterList[i]["underload"] = false;
+    // }
+    // console.log(element);
+    // }
+    // localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
 </script>
 <main>
     <div class="Title">
@@ -19,24 +19,37 @@
     </div>
     {#each SemesterList as semester}
         <div class="alert">
-            {#if semester["underload"]}
-                <p style="display: inline-block; margin-left: 30px;">
-                    <span class="bellSpan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
-                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                        </svg>
-                    </span>
-                </p>
-                <p>{semester["year"]} {semester["name"]} is underloaded!</p>
-            {:else if semester["overload"]}
-                <p style="display: inline-block; margin-left: 30px;">
-                    <span class="bellSpan">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
-                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
-                        </svg>
-                    </span>
-                </p>
-                <p>{semester["year"]} {semester["name"]} is overloaded!</p>
+            {#if semester["name"] !== "Midyear"}
+                {#if semester["load"] < 15}
+                    <p style="display: inline-block; margin-left: 30px;">
+                        <span class="bellSpan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                            </svg>
+                        </span>
+                    </p>
+                    <p>{semester["year"]} {semester["name"]} is underloaded!</p>
+                {:else if semester["load"] > 21}
+                    <p style="display: inline-block; margin-left: 30px;">
+                        <span class="bellSpan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                            </svg>
+                        </span>
+                    </p>
+                    <p>{semester["year"]} {semester["name"]} is overloaded!</p>
+                {/if}
+            {:else}
+                {#if semester["load"] > 6}
+                    <p style="display: inline-block; margin-left: 30px;">
+                        <span class="bellSpan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill=white class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                            </svg>
+                        </span>
+                    </p>
+                    <p>{semester["year"]} {semester["name"]} is overloaded!</p>
+                {/if} 
             {/if}
         </div>
     {/each}

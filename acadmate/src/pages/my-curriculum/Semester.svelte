@@ -226,24 +226,25 @@
         SemesterList[CurrentSemesterIndex]["units"] = totalUnits.toFixed(1);
         let loadUnits = totalUnits + uncreditedUnits;
         console.log(uncreditedUnits);
-        if (!(SemesterList[CurrentSemesterIndex]["name"] == "Midyear")) {
-            if (loadUnits >= 15){
-                SemesterList[CurrentSemesterIndex]["underload"] = false;
-            } else {
-                SemesterList[CurrentSemesterIndex]["underload"] = true;
-            }
-            if (loadUnits > 21){
-                SemesterList[CurrentSemesterIndex]["overload"] = true;
-            } else {
-                SemesterList[CurrentSemesterIndex]["overload"] = false;
-            }
-        } else {
-            if (loadUnits > 6){
-                SemesterList[CurrentSemesterIndex]["overload"] = true;
-            } else {
-                SemesterList[CurrentSemesterIndex]["overload"] = false;
-            }
-        }
+        // if (!(SemesterList[CurrentSemesterIndex]["name"] == "Midyear")) {
+        //     if (loadUnits >= 15){
+        //         SemesterList[CurrentSemesterIndex]["underload"] = false;
+        //     } else {
+        //         SemesterList[CurrentSemesterIndex]["underload"] = true;
+        //     }
+        //     if (loadUnits > 21){
+        //         SemesterList[CurrentSemesterIndex]["overload"] = true;
+        //     } else {
+        //         SemesterList[CurrentSemesterIndex]["overload"] = false;
+        //     }
+        // } else {
+        //     if (loadUnits > 6){
+        //         SemesterList[CurrentSemesterIndex]["overload"] = true;
+        //     } else {
+        //         SemesterList[CurrentSemesterIndex]["overload"] = false;
+        //     }
+        // }
+        SemesterList[CurrentSemesterIndex]["load"] = loadUnits.toFixed(1);
         localStorage.setItem("SemesterList", JSON.stringify(SemesterList));
         computeOverallGWA();
         location.reload();

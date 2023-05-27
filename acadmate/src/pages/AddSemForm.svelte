@@ -12,8 +12,9 @@
       gwa: 0.00,
       units: 0,
       classList: [],
-      underload: true,
-      overload: false
+      // underload: true,
+      // overload: false,
+      load: 0.0
     };
     dispatch('addSemester', semester);
   };
