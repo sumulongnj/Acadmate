@@ -5,7 +5,14 @@
     let percent = Math.min((totalOverallUnits / 148) * 100, 100); // min to cap percent to 100
     
     let overallGWA = parseFloat(localStorage.getItem("OverallGWA")).toFixed(4);
+    if (isNaN(overallGWA)){
+        overallGWA = (0.0).toFixed(4);
+    }
+    
     let maxGWA = parseFloat(localStorage.getItem("MaxGWA")).toFixed(4);
+    if (isNaN(maxGWA)){
+        maxGWA = (0.0).toFixed(4);
+    }
 </script>
 
 <main>
